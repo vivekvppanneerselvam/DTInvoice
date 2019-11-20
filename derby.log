@@ -1,0 +1,29 @@
+----------------------------------------------------------------
+Wed Nov 20 23:07:27 IST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016e-89e3-f0fa-00000221b0d0 
+on database directory C:\ProgramData\DTInvoice\fy\1574101800000-1605637800000\dtinvoice with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/D:/WS/bck/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_231-b11
+user.dir=D:\WS\DTInvoice
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Nov 20 23:07:28 IST 2019:
+Shutting down instance a816c00e-016e-89e3-f0fa-00000221b0d0 on database directory C:\ProgramData\DTInvoice\fy\1574101800000-1605637800000\dtinvoice with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+----------------------------------------------------------------
+Wed Nov 20 23:07:28 IST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 601a400f-016e-89e3-f0fa-00000221b0d0 
+on database directory C:\ProgramData\DTInvoice\fy\1574101800000-1605637800000\dtinvoice with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/D:/WS/bck/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_231-b11
+user.dir=D:\WS\DTInvoice
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

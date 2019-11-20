@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<BorderPane id="rootPane" xmlns="http://javafx.com/javafx/8.0.65" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dt.controller.HomeController">
+    <fx:define>
+        <Double fx:constant="MAX_VALUE" fx:id="maxDouble" /> 
+    </fx:define>
+    <stylesheets>
+        <URL value="@/resources/stylesheets/home.css"  />
+    </stylesheets>
+    
+    <top>
+      <VBox alignment="TOP_CENTER" maxWidth="$maxDouble">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu fx:id="fileMenu" mnemonicParsing="true" text="_File">
+                     <items>
+                         <MenuItem fx:id="createFinancialYearMenuItem" onAction="#onCreateFinancialYearAction"
+                           text="_Create Financial Year..."  mnemonicParsing="true"  accelerator="SHORTCUT+SHIFT+C"  /> 
+                         <MenuItem fx:id="openFinancialYearMenuItem" onAction="#onOpenFinancialYearAction"
+                           text="_Open Financial Year..."  mnemonicParsing="true" accelerator="SHORTCUT+SHIFT+O" /> 
+                           <MenuItem fx:id="closeFinancialYearMenuItem" onAction="#onCloseFinancialYearAction"
+                           text="Close _Financial Year"  mnemonicParsing="true" /> 
+                          <MenuItem fx:id="deleteFinancialYearMenuItem" 
+                            onAction="#onDeleteFinancialYearAction"
+                           text="Delete Financial Year..."  /> 
+                         <SeparatorMenuItem />
+                        <MenuItem fx:id="firmDetailsMenuItem"  mnemonicParsing="true" 
+                                  onAction="#onFirmDetailsCommand" text="Fir_m Details" />
+                        <MenuItem fx:id="measurementUnitsMenuItem" text="_Measurement Units"
+                                  mnemonicParsing="true" onAction="#onMeasurementUnitsCommmand" accelerator="SHORTCUT+SHIFT+M" />
+                        <MenuItem fx:id="itemsMenuItem" text="_Items" mnemonicParsing="true" 
+                                  onAction="#onItemsCommmand" accelerator="SHORTCUT+SHIFT+T" />
+                        <SeparatorMenuItem  />
+                        <MenuItem fx:id="exitMenuItem" mnemonicParsing="true" 
+                                  onAction="#onExitCommand" text="E_xit" accelerator="SHORTCUT+SHIFT+X" />
+                     </items>
+                </Menu>
+                <Menu mnemonicParsing="true" text="_Invoice">
+                  <items>
+                    <MenuItem mnemonicParsing="true" text="_Create Invoice" accelerator="SHORTCUT+SHIFT+I" 
+                       fx:id="createInvoiceMenuItem"  onAction="#onCreateInvoiceAction" />
+                    <MenuItem mnemonicParsing="true" text="_Search Invoice" accelerator="SHORTCUT+SHIFT+V" 
+                      fx:id="searchInvoiceMenuItem" onAction="#onSearchInvoiceAction" />
+                  </items>
+                </Menu>
+                <Menu fx:id="paymentsMenu" mnemonicParsing="true" text="_Payments">
+                    <items>
+                        <MenuItem fx:id="paymentReceivedMenuItem" text="Receive Payment" accelerator="SHORTCUT+SHIFT+P" 
+                            mnemonicParsing="true" onAction="#onReceivePaymentAction"  />
+                        <MenuItem fx:id="paymentSearchMenuItem" text="Search Payments" accelerator="SHORTCUT+SHIFT+Y" 
+                            mnemonicParsing="true" onAction="#onSearchPaymentAction" />
+                    </items>
+                </Menu> 
+                <Menu fx:id="customersMenu" mnemonicParsing="true" text="C_ustomers">
+                    <items>
+                        <MenuItem fx:id="customersMenuItem" text="Cus_tomers" 
+                                  mnemonicParsing="true" accelerator="SHORTCUT+SHIFT+U" 
+                                  onAction="#onCustomersAction" />
+                        <MenuItem fx:id="customerAccountMenuItem" accelerator="SHORTCUT+SHIFT+A" 
+                        text="Customer _Account" mnemonicParsing="true" 
+                                  onAction="#onCustomerAccountAction" /> 
+                    </items>
+                </Menu> 
+                <Menu text="P_references" mnemonicParsing="true" >
+                    <items>
+                        <MenuItem text="_Application Data Location..." fx:id="appDataLocationMenuItem" 
+                           onAction="#onApplicationDataLocationAction"  mnemonicParsing="true"   />
+                        <MenuItem text="Us_er Preferences..." fx:id="userPreferencesMenuItem" 
+                        accelerator="SHORTCUT+SHIFT+R"     onAction="#onUserPreferencesAction" mnemonicParsing="true"  /> 
+                        <CheckMenuItem text="_Hide Toolbar" fx:id="hideToolbarMenuItem" 
+                              onAction="#onHideToolbarAction"  mnemonicParsing="true"  />
+                    </items>
+                </Menu>
+                 <Menu text="_Maintenance" mnemonicParsing="true" >
+                    <items>
+                        <MenuItem text="_Backup Database..." fx:id="backupDatabaseMenuItem" 
+                           onAction="#onBackupDatabaseAction"  mnemonicParsing="true"  accelerator="SHORTCUT+SHIFT+B"    />
+                        <MenuItem text="_Restore Database..." fx:id="restoreDatabaseMenuItem" 
+                            onAction="#onRestoreDatabaseAction" mnemonicParsing="true"  /> 
+                         <MenuItem text="_Compact Database" fx:id="compactDatabaseMenuItem" accelerator="SHORTCUT+SHIFT+H" 
+                            onAction="#onCompactDatabaseAction" mnemonicParsing="true"  /> 
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="true" text="_Help">
+                  <items>
+                    <MenuItem  fx:id="aboutMenuItem" mnemonicParsing="true" 
+                        onAction="#onAboutDialogAction"  text="_About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         <ToolBar fx:id="toolbar" >
+              <items>
+                <Label fx:id="lblCreateInvoice" onMouseClicked="#onCreateInvoiceCommand" >
+                    <tooltip>
+                        <Tooltip text="Create Invoice" />
+                    </tooltip>
+                </Label>
+                <Label fx:id="lblSearchInvoice" onMouseClicked="#onSearchInvoicesCommand">
+                    <tooltip>
+                        <Tooltip text="Search Invoices" />
+                    </tooltip>
+                </Label>
+                <Separator maxHeight="24.0"   />
+                 <Label fx:id="lblReceivePayment" onMouseClicked="#onReceivePaymentCommand">
+                    <tooltip>
+                        <Tooltip text="Receive Payment" />
+                    </tooltip>
+                </Label>
+                <Label fx:id="lblSearchPayment" onMouseClicked="#onSearchPaymentsCommand">
+                    <tooltip>
+                        <Tooltip text="Search Payments" />
+                    </tooltip>
+                </Label>
+                <Separator maxHeight="24.0"   />
+                 <Label fx:id="lblCustomers" onMouseClicked="#onCustomersCommand">
+                    <tooltip>
+                        <Tooltip text="Customers" />
+                    </tooltip>
+                </Label>
+                <Label fx:id="lblCustomerAccount" onMouseClicked="#onCustomerAccountCommand">
+                    <tooltip>
+                        <Tooltip text="Customer Account" />
+                    </tooltip>
+                </Label>
+                <Separator maxHeight="24.0"   />
+                <Label fx:id="lblItems" onMouseClicked="#onItemsCommand">
+                    <tooltip>
+                        <Tooltip text="Items" />
+                    </tooltip>
+                </Label>
+                <Label fx:id="lblMeasurementUnits" onMouseClicked="#onMeasurementUnitsCommand">
+                    <tooltip>
+                        <Tooltip text="Measurement Units" />
+                    </tooltip>
+                </Label>
+                <Separator maxHeight="24.0"   />
+                <Label fx:id="lblUserSettings" onMouseClicked="#onUserSettingsCommand">
+                    <tooltip>
+                        <Tooltip text="User Settings" />
+                    </tooltip>
+                </Label>
+                <Label fx:id="lblBackup"  onMouseClicked="#onBackupCommand">
+                    <tooltip>
+                        <Tooltip text="Data Backup" />
+                    </tooltip>
+                </Label>
+              </items>
+            </ToolBar> 
+         </children></VBox>
+   </top>
+   <center>
+      <TabPane fx:id="tabPane" maxHeight="$maxDouble" maxWidth="$maxDouble"
+               BorderPane.alignment="CENTER">
+        
+      </TabPane>
+   </center>
+</BorderPane>
