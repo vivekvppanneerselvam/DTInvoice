@@ -9,3 +9,5 @@ derby.txt
 derby.log
 dtinvoice.db
 /build
+manifest.mf
+src/resources/dtinvoice.db
