@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TicketReceiptReport" pageWidth="226" pageHeight="615" whenNoDataType="BlankPage" columnWidth="210" leftMargin="8" rightMargin="8" topMargin="0" bottomMargin="14" isFloatColumnFooter="true" isIgnorePagination="true" uuid="7d955f18-8e54-4bc2-b6ee-ee0c95d5874e">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="336"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="invoiceNumber" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="invoiceDate" class="java.time.LocalDate" isForPrompting="false"/>
+	<parameter name="customerName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="customerCity" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="additionalCharge" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="discount" class="java.math.BigDecimal" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="firmName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="firmAddress" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="firmPhoneNumbers" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="firmEmailAddress" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="firmLogo" class="java.io.InputStream" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="item" class="java.lang.Object">
+		<fieldDescription><![CDATA[item]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[quantity]]></fieldDescription>
+	</field>
+	<field name="unit" class="java.lang.Object">
+		<fieldDescription><![CDATA[unit]]></fieldDescription>
+	</field>
+	<field name="rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[rate]]></fieldDescription>
+	</field>
+	<variable name="amount" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{quantity}.multiply( $F{rate} ).setScale(2, java.math.RoundingMode.HALF_UP )]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="amountTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{amount}]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="quantityTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="invoiceTotal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{amountTotal}.add( $P{additionalCharge} ).subtract($P{discount})]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="totalPages" class="java.lang.Integer" incrementType="Page">
+		<initialValueExpression><![CDATA[Integer.valueOf("1")]]></initialValueExpression>
+	</variable>
+	<variable name="showItemsTotal" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[Boolean.TRUE]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="165" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField-12" x="50" y="0" width="160" height="18" isRemoveLineWhenBlank="true" uuid="1e02219e-746e-4006-a9bf-04f1fc7b8916"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{firmName} != null ? $P{firmName}.trim() : ""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField-13" x="50" y="18" width="160" height="14" isRemoveLineWhenBlank="true" uuid="3b7b3bbb-4449-4b44-825f-df43abff8bac"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{firmAddress} != null ? ($P{firmAddress}.trim().replaceAll("\r\n", ", ").replaceAll("\n", ", ")) : ""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField-14" x="50" y="32" width="160" height="14" isRemoveLineWhenBlank="true" uuid="167ee810-352c-47aa-a679-847362385f8a"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{firmPhoneNumbers} == null || $P{firmPhoneNumbers}.isEmpty()) ? "" :  "Phone Number(s): " + $P{firmPhoneNumbers}.trim()]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField-15" x="50" y="46" width="160" height="14" isRemoveLineWhenBlank="true" uuid="dd5c0f68-f21d-4980-aace-3bb61b836600"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{firmEmailAddress} == null || $P{firmEmailAddress}.isEmpty()) ? "" : "Email Address: " + $P{firmEmailAddress}.trim()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-1" x="-3" y="80" width="209" height="4" isRemoveLineWhenBlank="true" uuid="ea27f2b3-4c48-430f-8687-b9b2a95c06e5"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement key="line-1" positionType="Float" x="0" y="150" width="211" height="1" uuid="273b308e-2fa4-4d3c-834b-c6aa0c2759d7"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement key="staticText-2" positionType="Float" x="0" y="150" width="92" height="15" uuid="035e1dca-6b22-46be-b28a-0553e3cd7efa"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ITEM NAME"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText-1" positionType="Float" x="89" y="150" width="34" height="15" uuid="7acaa13b-e972-4890-9716-3c432fbec58a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["QTY"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText-1" positionType="Float" x="123" y="150" width="35" height="15" uuid="30a8b65e-9b23-4a16-aeea-26e360081f52"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RATE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText-4" positionType="Float" x="158" y="150" width="50" height="15" uuid="fef7159d-d8c6-4a32-a92f-0bc5ba09d513"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["AMOUNT"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField-16" x="-3" y="84" width="211" height="14" isRemoveLineWhenBlank="true" uuid="186c71df-0b99-44e1-8909-7488f1662472"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CASH BILL"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="103" width="50" height="12" isRemoveLineWhenBlank="true" uuid="b6b4144b-81ec-4a46-87d0-0827531d18ee"/>
+				<textElement markup="html">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DATE:"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-1" x="-3" y="100" width="216" height="1" isRemoveLineWhenBlank="true" uuid="79e178a8-b51f-4221-9ed3-03e54036b2c5"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="115" width="50" height="12" isRemoveLineWhenBlank="true" uuid="d273a793-9744-4a7d-84c6-0a304c1eff12"/>
+				<textElement markup="html">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BILL NO:"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="127" width="70" height="12" isRemoveLineWhenBlank="true" uuid="bfebcff3-c12d-4213-a110-2351c60d2d41"/>
+				<textElement markup="html">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CUSTOMER DETAILS:"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="53" y="115" width="50" height="12" isRemoveLineWhenBlank="true" uuid="703914e0-7277-472b-91de-20e484ab0c73"/>
+				<textElement markup="html">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{invoiceNumber}.intValue()]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="53" y="103" width="65" height="12" isRemoveLineWhenBlank="true" uuid="94b36f19-95c9-43d5-8901-65c37c3fda45"/>
+				<textElement markup="html">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{invoiceDate}.format( java.time.format.DateTimeFormatter.ofPattern("dd-MMM-yyyy") )]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="118" y="105" width="50" height="12" isRemoveLineWhenBlank="true" uuid="f9e09c81-7be6-4537-b863-a61975c4b00b"/>
+				<textElement markup="html">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TIME:"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="161" y="105" width="50" height="12" isRemoveLineWhenBlank="true" uuid="479e11dc-fbe6-46b6-bc4e-51d04c5fab78"/>
+				<textElement markup="html">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["10:10:10"]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="1" width="48" height="59" isRemoveLineWhenBlank="true" uuid="7a5f0f9d-9b9c-4c6c-bd3d-595721c14cf0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{firmLogo}]]></imageExpression>
+			</image>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="70" y="126" width="136" height="15" uuid="190f4b28-874c-499c-87d4-bfb3a4b79ac8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.0" lineStyle="Dotted"/>
+				</box>
+				<textFieldExpression><![CDATA[$P{customerName} == null ? "Cash Invoice" : ($P{customerName} + ($P{customerCity} == null ? "" : ", " + $P{customerCity}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<printWhenExpression><![CDATA[Boolean.valueOf(String.valueOf($V{PAGE_NUMBER}).equals("1"))]]></printWhenExpression>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="1" y="11" width="91" height="12" isRemoveLineWhenBlank="true" uuid="e63d93f1-96ee-4f14-a6df-290c679f8ddb"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="161" y="10" width="50" height="12" isRemoveLineWhenBlank="true" uuid="60edcc35-f474-45bd-8f76-ef68d2f9e50c"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($V{amount})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="123" y="10" width="35" height="12" uuid="ef537b1f-724a-4613-a552-52aa301a5a56"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($F{rate})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="93" y="10" width="32" height="12" uuid="136f32c4-415e-4927-b427-6ae2a0d6c4f0"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-1" positionType="Float" x="-1" y="5" width="214" height="1" uuid="539fab9c-a8ed-4a29-a27b-bc406dd48f53"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band splitType="Prevent"/>
+	</lastPageFooter>
+	<summary>
+		<band height="182" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="staticText-5" x="3" y="10" width="87" height="13" uuid="b0bd8927-e29a-4aa1-9abe-d00733d3ae58"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL:"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="staticText-7" x="2" y="104" width="92" height="13" isRemoveLineWhenBlank="true" uuid="d0b13d87-9a2a-4e6f-b881-c51cd3d1b64e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Paid Amount:"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-2" x="-3" y="10" width="225" height="1" uuid="c91e8cb0-ad36-41d3-bbd2-917b61a79069"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField-1" x="101" y="134" width="105" height="13" isRemoveLineWhenBlank="true" uuid="1ac22f30-b96b-479d-a08d-f89344062819"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{prevDueAmount})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="101" y="104" width="105" height="13" isRemoveLineWhenBlank="true" uuid="ca499c60-19f6-4d3e-a7b6-88dff8fe6d68"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{paid})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="staticText-9" x="0" y="134" width="92" height="13" isRemoveLineWhenBlank="true" uuid="ab21540c-eadf-40b2-98f6-3cdc683cb72f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Due Amount:"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-2" x="-3" y="97" width="211" height="1" isRemoveLineWhenBlank="true" uuid="10b5849c-81d9-4b19-a8ab-ee7843e581d7"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="101" y="121" width="108" height="13" isRemoveLineWhenBlank="true" uuid="224563b5-5758-4a0d-9ebf-e9cddc69ea0a"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{balance})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="staticText-7" x="0" y="117" width="92" height="17" isRemoveLineWhenBlank="true" uuid="651d2049-cf8f-423b-8a26-a36bf3e5d4ee"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Balance Amount"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField-1" positionType="Float" x="-2" y="170" width="211" height="12" isRemoveLineWhenBlank="true" uuid="4607d3dd-56b0-4f8d-93a7-b8d74f31c275"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["*** Thank you visit again ***"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="staticText-9" x="2" y="147" width="92" height="13" isRemoveLineWhenBlank="true" uuid="c6fd8b99-b77e-48c6-9863-8f8901a593a7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total Due Amount:"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField-1" x="101" y="147" width="108" height="13" isRemoveLineWhenBlank="true" uuid="cb46c2f6-87c9-448f-81ca-f2bc02069b41"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{totalDueAmount})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="142" y="9" width="67" height="13" uuid="ac8320da-4ce1-48ca-a966-5e8ffb08e646"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($V{amountTotal})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="100" y="10" width="32" height="12" uuid="0b7e1006-83fd-4372-a975-d99a3e5e4211"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{quantityTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-2" x="1" y="28" width="213" height="1" uuid="6cddda56-461f-4b1a-aa9e-5a94482ad24b"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="1" y="30" width="122" height="12" uuid="fceee2b3-fe94-4c93-9816-1fc137d1be04">
+					<printWhenExpression><![CDATA[$P{additionalCharge} != null && $P{additionalCharge}.signum() == 1]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["+(Plus)Additional Charge (in)"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="2" y="46" width="121" height="12" uuid="4fa29951-d11e-48c8-9b55-ec9c8e38ce3c">
+					<printWhenExpression><![CDATA[$P{discount} != null && $P{discount}.signum() == 1]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-(minus) Discount:"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="133" y="30" width="73" height="13" uuid="feb60652-716a-4268-bb41-c0837bd8cf66">
+					<printWhenExpression><![CDATA[$P{additionalCharge} != null && $P{additionalCharge}.signum() == 1]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{additionalCharge})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="133" y="46" width="74" height="13" uuid="473e382f-647e-454a-af93-b0f3abe4e702">
+					<printWhenExpression><![CDATA[$P{discount} != null && $P{discount}.signum() == 1]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{discount})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="2" y="60" width="121" height="12" uuid="118dc9c5-617f-4ef0-aaab-f0505001394f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Net Amount:"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="133" y="60" width="74" height="13" uuid="d43bae9c-ad1e-4d99-9c9f-cf13d2de099c"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($V{invoiceTotal})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-2" x="0" y="160" width="211" height="1" isRemoveLineWhenBlank="true" uuid="d599b776-8040-4f3a-a3e6-84c09a398f00"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToTallestObject" x="2" y="80" width="211" height="16" uuid="9bfa6d76-9a63-4d60-ba01-73486480c731">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+					<font fontName="Serif" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<u>Amount in words:</u> " + com.dt.utils.NumberToWords.convertNumberToWords($V{invoiceTotal}, true, true)]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
