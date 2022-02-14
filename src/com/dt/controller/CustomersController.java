@@ -162,7 +162,8 @@ public class CustomersController implements TabContent {
                                 customer.nameProperty(), customer.cityProperty(),
                                 customer.phoneNumbersProperty(), 
                                 customer.openingBalanceProperty(),
-                                customer.balanceTypeProperty()
+                                customer.balanceTypeProperty()                                
+                                
                             };
 
                             return array;

@@ -94,7 +94,8 @@
                                        mnemonicParsing="true" labelFor="${tfName}" styleClass="nodeLabel" />
                             <TextField fx:id="tfName" GridPane.columnIndex="1" 
                                 focusTraversable="false" GridPane.rowIndex="0" prefColumnCount="25" 
-                                           editable="false" styleClass="readOnlyField" />
+                                           editable="false" styleClass="readOnlyField" />                                           
+                                  
 
                             <Label GridPane.columnIndex="0" GridPane.rowIndex="1"
                                        styleClass="nodeLabel" text="_City:" mnemonicParsing="true" labelFor="${tfCity}" />
@@ -113,6 +114,12 @@
                             <TextField fx:id="tfOpeningBalance" GridPane.columnIndex="1"
                                  focusTraversable="false"   GridPane.rowIndex="3" prefColumnCount="25" 
                                            editable="false"  styleClass="readOnlyField" />
+                                           
+                                                    <Label GridPane.columnIndex="0" GridPane.rowIndex="4" text="_Name:"
+                                       mnemonicParsing="true" labelFor="${tfTamilName}" styleClass="nodeLabel" />
+                            <TextField fx:id="tfTamilName" GridPane.columnIndex="1" 
+                                focusTraversable="false" GridPane.rowIndex="4" prefColumnCount="25" 
+                                           editable="false" styleClass="readOnlyField" />
                         </children>
                     </GridPane>
                      <ImageView fx:id="checkImage" opacity="0" >

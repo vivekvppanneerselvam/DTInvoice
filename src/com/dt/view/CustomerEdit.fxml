@@ -65,39 +65,95 @@
                         visible="false" managed="false"  />
             </VBox>
             
-            <Label labelFor="$tfCity" text="_City:" mnemonicParsing="true" 
+                <Label labelFor="$tfAddress1" text="_Address1:" mnemonicParsing="true" 
                GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="TOP"  
                 GridPane.halignment="RIGHT"   styleClass="nodeLabel"  />
                <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="3" fillWidth="true" >
+                   <TextField fx:id="tfAddress1"  />
+                    <Label fx:id="address1Error" styleClass="errorLabel"
+                        visible="false" managed="false"  />
+               </VBox> 
+               
+                <Label labelFor="$tfAddress2" text="_Address2:" mnemonicParsing="true" 
+               GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP"  
+                GridPane.halignment="RIGHT"   styleClass="nodeLabel"  />
+               <VBox GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="3" fillWidth="true" >
+                   <TextField fx:id="tfAddress2"  />
+                    <Label fx:id="address2Error" styleClass="errorLabel"
+                        visible="false" managed="false"  />
+               </VBox> 
+            
+            <Label labelFor="$tfCity" text="_City:" mnemonicParsing="true" 
+               GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="TOP"  
+                GridPane.halignment="RIGHT"   styleClass="nodeLabel"  />
+               <VBox GridPane.columnIndex="1" GridPane.rowIndex="4" spacing="3" fillWidth="true" >
                    <TextField fx:id="tfCity"  />
                     <Label fx:id="cityError" styleClass="errorLabel"
                         visible="false" managed="false"  />
                </VBox>            
             
              <Label labelFor="$tfPhoneNumbers" text="_Phone Number(s):" mnemonicParsing="true" 
-               GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP"  
+               GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.valignment="TOP"  
                GridPane.halignment="RIGHT"   styleClass="nodeLabel"     />
-             <VBox GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="4" fillWidth="true" >
+             <VBox GridPane.columnIndex="1" GridPane.rowIndex="5" spacing="4" fillWidth="true" >
                 <TextField fx:id="tfPhoneNumbers" 
                     promptText="Delimit multiple numbers with comma" />
                     <Label fx:id="phoneNumbersError" styleClass="errorLabel"
                         visible="false"  managed="false"  />
                </VBox> 
                
+               
+                  <Label labelFor="$tfTamilName" text="_Name(Tamil):" mnemonicParsing="true" 
+                GridPane.columnIndex="0" GridPane.rowIndex="6" styleClass="requiredInput" 
+                GridPane.valignment="TOP" GridPane.halignment="RIGHT"  />
+            <VBox spacing="3" GridPane.columnIndex="1"  GridPane.rowIndex="6" fillWidth="true" >
+                <TextField fx:id="tfTamilName"   />
+                <Label fx:id="tamilNameError" styleClass="errorLabel" 
+                        visible="false" managed="false"  />
+            </VBox>
+            
+                <Label labelFor="$tfTamilAddress1" text="_Address1(Tamil):" mnemonicParsing="true" 
+               GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.valignment="TOP"  
+                GridPane.halignment="RIGHT"   styleClass="nodeLabel"  />
+               <VBox GridPane.columnIndex="1" GridPane.rowIndex="7" spacing="3" fillWidth="true" >
+                   <TextField fx:id="tfTamilAddress1"  />
+                    <Label fx:id="tamilAddress1Error" styleClass="errorLabel"
+                        visible="false" managed="false"  />
+               </VBox> 
+               
+                <Label labelFor="$tfTamilAddress2" text="_Address2 (Tamil):" mnemonicParsing="true" 
+               GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.valignment="TOP"  
+                GridPane.halignment="RIGHT"   styleClass="nodeLabel"  />
+               <VBox GridPane.columnIndex="1" GridPane.rowIndex="8" spacing="3" fillWidth="true" >
+                   <TextField fx:id="tfTamilAddress2"  />
+                    <Label fx:id="tamilAddress2Error" styleClass="errorLabel"
+                        visible="false" managed="false"  />
+               </VBox> 
+               
+               
+                 <Label labelFor="$tfTamilAddress3" text="_City(Tamil):" mnemonicParsing="true" 
+               GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.valignment="TOP"  
+                GridPane.halignment="RIGHT"   styleClass="nodeLabel"  />
+               <VBox GridPane.columnIndex="1" GridPane.rowIndex="9" spacing="3" fillWidth="true" >
+                   <TextField fx:id="tfTamilAddress3"  />
+                    <Label fx:id="tamilAddress3Error" styleClass="errorLabel"
+                        visible="false" managed="false"  />
+               </VBox>
+               
             <Label labelFor="$tfOpeningBalance" text="_Opening Balance (in &#x20B9;):" 
                    mnemonicParsing="true" styleClass="nodeLabel" 
-               GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="TOP"  
+               GridPane.columnIndex="0" GridPane.rowIndex="10" GridPane.valignment="TOP"  
              GridPane.halignment="RIGHT"  />
-             <VBox GridPane.columnIndex="1" GridPane.rowIndex="4" spacing="3" fillWidth="true" >
+             <VBox GridPane.columnIndex="1" GridPane.rowIndex="10" spacing="3" fillWidth="true" >
                 <TextField fx:id="tfOpeningBalance" text="0.00" />
                     <Label fx:id="openingBalanceError" styleClass="errorLabel" 
                         visible="false"  managed="false"  />
                </VBox>        
                
             <Label labelFor="$tfBalanceType" text="_Balance Type:" mnemonicParsing="true" 
-               GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.valignment="TOP"  
+               GridPane.columnIndex="0" GridPane.rowIndex="11" GridPane.valignment="TOP"  
              GridPane.halignment="RIGHT" styleClass="nodeLabel"  />
-             <VBox GridPane.columnIndex="1" GridPane.rowIndex="5" spacing="3" fillWidth="true" >
+             <VBox GridPane.columnIndex="1" GridPane.rowIndex="11" spacing="3" fillWidth="true" >
                  <HBox spacing="15">
                      <RadioButton fx:id="rdCredit" text="_Credit" mnemonicParsing="true" 
                        toggleGroup="$balanceTypeToggle" />
