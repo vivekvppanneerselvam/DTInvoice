@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dt.invoice.ModernInvoiceListController"
+
+            style="-fx-background-color: #F3F4F6;">
+
+    <!-- ================================================= -->
+    <!-- TOP -->
+    <!-- ================================================= -->
+
+    <top>
+
+        <VBox spacing="10"
+
+              style="-fx-background-color: white;
+                     -fx-border-color: #E5E7EB;
+                     -fx-border-width: 0 0 1 0;">
+
+            <padding>
+
+                <Insets top="15"
+                        right="20"
+                        bottom="15"
+                        left="20"/>
+
+            </padding>
+
+            <Label text="Invoice Management"
+
+                   style="-fx-font-size: 24;
+                          -fx-font-weight: bold;"/>
+
+            <HBox spacing="10">
+
+                <TextField fx:id="tfSearch"
+
+                           promptText="Invoice No / Customer / Phone / GST"
+
+                           prefHeight="36"
+
+                           HBox.hgrow="ALWAYS"/>
+
+                <DatePicker fx:id="dpFrom"/>
+
+                <DatePicker fx:id="dpTo"/>
+
+                <Button text="Search"
+                        onAction="#onSearch"
+
+                        style="-fx-background-color: #111827;
+                               -fx-text-fill: white;"/>
+
+                <Button text="Today"
+                        onAction="#onToday"/>
+
+                <Button text="Refresh"
+                        onAction="#onRefresh"/>
+
+            </HBox>
+
+        </VBox>
+
+    </top>
+
+    <!-- ================================================= -->
+    <!-- CENTER -->
+    <!-- ================================================= -->
+
+    <center>
+
+        <SplitPane dividerPositions="0.42">
+
+            <!-- ========================================= -->
+            <!-- LEFT -->
+            <!-- ========================================= -->
+
+            <VBox spacing="10"
+
+                  style="-fx-background-color: white;">
+
+                <padding>
+
+                    <Insets top="15"
+                            right="15"
+                            bottom="15"
+                            left="15"/>
+
+                </padding>
+
+                <Label text="Invoices"
+
+                       style="-fx-font-size: 18;
+                              -fx-font-weight: bold;"/>
+
+                <TableView fx:id="invoiceTable"
+
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn fx:id="colInvoiceNo"
+                                     text="Invoice"
+                                     prefWidth="120"/>
+
+                        <TableColumn fx:id="colCustomer"
+                                     text="Customer"
+                                     prefWidth="180"/>
+
+                        <TableColumn fx:id="colDate"
+                                     text="Date"
+                                     prefWidth="140"/>
+
+                        <TableColumn fx:id="colTotal"
+                                     text="Total"
+                                     prefWidth="100"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+            <!-- ========================================= -->
+            <!-- RIGHT -->
+            <!-- ========================================= -->
+
+            <VBox spacing="12"
+
+                  style="-fx-background-color: white;">
+
+                <padding>
+
+                    <Insets top="15"
+                            right="15"
+                            bottom="15"
+                            left="15"/>
+
+                </padding>
+
+                <!-- HEADER -->
+
+                <HBox alignment="CENTER_LEFT"
+                      spacing="10">
+
+                    <Label text="Invoice Details"
+
+                           style="-fx-font-size: 18;
+                                  -fx-font-weight: bold;"/>
+
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <Button text="Edit Invoice"
+                            onAction="#onEditInvoice"/>
+                    <Button text="Print"
+                            onAction="#onPrint"/>
+
+                    <Button text="Delete"
+                            onAction="#onDelete"
+
+                            style="-fx-background-color: #DC2626;
+                                   -fx-text-fill: white;"/>
+
+                </HBox>
+
+                <!-- CUSTOMER -->
+
+                <GridPane hgap="10"
+                          vgap="10">
+
+                    <columnConstraints>
+
+                        <ColumnConstraints percentWidth="30"/>
+
+                        <ColumnConstraints percentWidth="70"/>
+
+                    </columnConstraints>
+
+                    <Label text="Invoice No"
+                           GridPane.rowIndex="0"
+                           GridPane.columnIndex="0"/>
+
+                    <Label fx:id="lblInvoiceNo"
+                           GridPane.rowIndex="0"
+                           GridPane.columnIndex="1"/>
+
+                    <Label text="Customer"
+                           GridPane.rowIndex="1"
+                           GridPane.columnIndex="0"/>
+
+                    <Label fx:id="lblCustomer"
+                           GridPane.rowIndex="1"
+                           GridPane.columnIndex="1"/>
+
+                    <Label text="Phone"
+                           GridPane.rowIndex="2"
+                           GridPane.columnIndex="0"/>
+
+                    <Label fx:id="lblPhone"
+                           GridPane.rowIndex="2"
+                           GridPane.columnIndex="1"/>
+
+                    <Label text="GST"
+                           GridPane.rowIndex="3"
+                           GridPane.columnIndex="0"/>
+
+                    <Label fx:id="lblGST"
+                           GridPane.rowIndex="3"
+                           GridPane.columnIndex="1"/>
+
+                    <Label text="Total"
+                           GridPane.rowIndex="4"
+                           GridPane.columnIndex="0"/>
+
+                    <Label fx:id="lblGrandTotal"
+                           style="-fx-font-size: 18;
+                                  -fx-font-weight: bold;"
+
+                           GridPane.rowIndex="4"
+                           GridPane.columnIndex="1"/>
+
+                </GridPane>
+
+                <!-- ITEMS -->
+
+                <Label text="Invoice Items"
+
+                       style="-fx-font-size: 16;
+                              -fx-font-weight: bold;"/>
+
+                <TableView fx:id="itemsTable"
+
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn fx:id="colItem"
+                                     text="Item"
+                                     prefWidth="220"/>
+
+                        <TableColumn fx:id="colQty"
+                                     text="Qty"
+                                     prefWidth="80"/>
+
+                        <TableColumn fx:id="colPrice"
+                                     text="Price"
+                                     prefWidth="100"/>
+
+                        <TableColumn fx:id="colGST"
+                                     text="GST"
+                                     prefWidth="80"/>
+
+                        <TableColumn fx:id="colItemTotal"
+                                     text="Total"
+                                     prefWidth="120"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+        </SplitPane>
+
+    </center>
+
+</BorderPane>

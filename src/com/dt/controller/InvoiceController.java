@@ -9,6 +9,9 @@ import com.dt.application.Global;
 import com.dt.dto.*;
 import com.dt.utils.*;
 import com.dt.dao.*;
+
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterJob;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,14 +49,28 @@ import javafx.stage.Modality;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.util.JRSaver;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
 import java.util.logging.*;
+
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.AttributeSet;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.HashPrintServiceAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.PrintServiceAttributeSet;
+
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -355,7 +372,7 @@ public class InvoiceController implements TabContent {
 		tfPaid.textProperty().addListener((observable, oldValue, newValue) -> {
 			isDirty.set(true);
 		});
-		
+
 
 		tfCustomer.textProperty().addListener((observable, oldValue, newValue) -> {
 			isDirty.set(true);
@@ -760,7 +777,7 @@ public class InvoiceController implements TabContent {
 		}
 		balance = netAmount.subtract(paid);
 		totalDue = prevDueAmount.add(balance);	
-		
+
 		tfBalance.setText(IndianCurrencyFormatting.applyFormatting(balance));
 		tfTotalDueAmount.setText(IndianCurrencyFormatting.applyFormatting(totalDue));
 
@@ -800,7 +817,7 @@ public class InvoiceController implements TabContent {
 
 		total = total.add(charge);
 		tfNetAmount.setText(IndianCurrencyFormatting.applyFormatting(total));
-		
+
 		updateBalanceDueAmount();
 	}
 
@@ -963,9 +980,9 @@ public class InvoiceController implements TabContent {
 			fireEntityEditedEvent(invoice);
 		}
 
-		if (chkPrintOnSave.isSelected()) {
+		//if (chkPrintOnSave.isSelected()) {
 			printInvoice(invoice);
-		}
+		//}
 
 		return true;
 	}
@@ -1015,42 +1032,42 @@ public class InvoiceController implements TabContent {
 			charge = charge.abs().setScale(2, RoundingMode.HALF_UP);
 			invoice.setAdditionalCharge(charge);
 		}
-		
+
 		if(!invoice.getIsCashInvoice()) {
-		String paidString = tfPaid.getText().trim();
-		if (!paidString.isEmpty()) {
-			BigDecimal paid = new BigDecimal(paidString);
-			paid = paid.abs().setScale(2, RoundingMode.HALF_UP);
-			invoice.setPaid(paid);
-		}
-		
-		String balanceString = tfBalance.getText().trim();
-		System.out.println("balanceString"+balanceString);
-		if (!balanceString.isEmpty()) {
-			BigDecimal balance = new BigDecimal(balanceString);
-			balance = balance.abs().setScale(2, RoundingMode.HALF_UP);
-			invoice.setBalance(balance);
-		}
-		
-		String prevDueAmountString = tfPrevDueAmount.getText().trim();
-		if (!prevDueAmountString.isEmpty()) {
-			BigDecimal prevDueAmount = new BigDecimal(prevDueAmountString);
-			prevDueAmount = prevDueAmount.abs().setScale(2, RoundingMode.HALF_UP);
-			invoice.setPrevDueAmount(prevDueAmount);
-		}
-		
-		String totalDueAmountString = tfTotalDueAmount.getText().trim();
-		if (!totalDueAmountString.isEmpty()) {
-			BigDecimal totalDueAmount = new BigDecimal(totalDueAmountString);
-			totalDueAmount = totalDueAmount.abs().setScale(2, RoundingMode.HALF_UP);
-			invoice.setTotalDueAmount(totalDueAmount);
-		}
+			String paidString = tfPaid.getText().trim();
+			if (!paidString.isEmpty()) {
+				BigDecimal paid = new BigDecimal(paidString);
+				paid = paid.abs().setScale(2, RoundingMode.HALF_UP);
+				invoice.setPaid(paid);
+			}
+
+			String balanceString = tfBalance.getText().trim();
+			System.out.println("balanceString"+balanceString);
+			if (!balanceString.isEmpty()) {
+				BigDecimal balance = new BigDecimal(balanceString);
+				balance = balance.abs().setScale(2, RoundingMode.HALF_UP);
+				invoice.setBalance(balance);
+			}
+
+			String prevDueAmountString = tfPrevDueAmount.getText().trim();
+			if (!prevDueAmountString.isEmpty()) {
+				BigDecimal prevDueAmount = new BigDecimal(prevDueAmountString);
+				prevDueAmount = prevDueAmount.abs().setScale(2, RoundingMode.HALF_UP);
+				invoice.setPrevDueAmount(prevDueAmount);
+			}
+
+			String totalDueAmountString = tfTotalDueAmount.getText().trim();
+			if (!totalDueAmountString.isEmpty()) {
+				BigDecimal totalDueAmount = new BigDecimal(totalDueAmountString);
+				totalDueAmount = totalDueAmount.abs().setScale(2, RoundingMode.HALF_UP);
+				invoice.setTotalDueAmount(totalDueAmount);
+			}
 		}else {
 			invoice.setPaid(BigDecimal.ZERO);
 			invoice.setBalance(BigDecimal.ZERO);
 			invoice.setPrevDueAmount(BigDecimal.ZERO);
 			invoice.setTotalDueAmount(BigDecimal.ZERO);
-			
+
 		}
 
 		invoice.getInvoiceItems().addAll(invoiceItems);
@@ -1192,18 +1209,18 @@ public class InvoiceController implements TabContent {
 			tfDiscount.setText(amount.toPlainString());
 			total = total.subtract(amount);
 		}
-		
+
 		amount = invoice.getPrevDueAmount();
 		if (amount != null) {
 			tfPrevDueAmount.setText(amount.toPlainString());			
 		}
-		
+
 		amount = invoice.getPaid();
 		if (amount != null) {
 			paid = amount;
 			tfPaid.setText(amount.toPlainString());			
 		}
-		
+
 		amount = invoice.getTotalDueAmount();
 		if (amount != null) {
 			tfTotalDueAmount.setText(amount.toPlainString());			
@@ -1264,53 +1281,44 @@ public class InvoiceController implements TabContent {
 	}
 
 	private void printInvoice(Invoice invoice) {
-		JasperReport jasperReport = null;
-		JasperPrint jasperPrint = null;
-		Map map = null;        
-		try {
-			map = getReportParameters(invoice);
-			InputStream reportStream = InvoiceController.class.getResourceAsStream("/resources/reports/dt_invoice.jrxml");
-			//jasperReport = JasperCompileManager.compileReport(reportStream);
-			jasperReport = JasperCompileManager.compileReport(reportStream);
-			JRSaver.saveObject(jasperReport, "dt_invoice.jasper");
-			//InputStream reportStream = getFileAsStream("/reports/fxbilling_invoice.jasper");
-			jasperPrint = JasperFillManager.fillReport(jasperReport, map, new JRBeanCollectionDataSource(invoice.getInvoiceItems(), true));
-			if (userPreferences.getShowPrintPreview()) {
-				JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
-				jasperViewer.setTitle("Invoice");
-				jasperViewer.setVisible(true);
-			} else {
-				//command for printing the report
-				try {
-					//false means don't show the print dialog. Send output instead directly to the default printer
-					boolean showPrintDialog = userPreferences.getShowPrintDialog();
-					JasperPrintManager.printReport(jasperPrint, showPrintDialog); 
-				} catch (Exception ex) {
-					logger.logp(Level.SEVERE, InvoiceController.class.getName(), 
-							"printInvoice", "Error in printReport function call", ex);
-					Utility.beep();
-					String message = "An error occurred whilst printing the invoice!";
-					Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
-					alert.setTitle("Invoice Printing Error");
-					alert.setHeaderText("Error in printing the invoice");
-					alert.initOwner(mainWindow);
-					Global.styleAlertDialog(alert);
-					alert.showAndWait();
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			//    		Utility.beep();
-			//    		String message = "An error occurred whilst collecting data to print the invoice!";
-			//    		Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
-			//    		alert.setTitle("Error Occurred");
-			//    		alert.setHeaderText("Error in retrieving data for printing the invoice");
-			//    		alert.initOwner(mainWindow);
-			//    		Global.styleAlertDialog(alert);
-			//    		alert.showAndWait();
-			//    		return;
-		}
 
+		JasperReport jasperReport = null;
+
+		JasperPrint jasperPrint = null;
+
+		Map map = null;
+
+		try {
+
+			map = getReportParameters(invoice);
+
+			InputStream reportStream =
+					getClass().getResourceAsStream(
+							"/resources/reports/dt_invoice.jrxml"
+					);
+
+			jasperReport =
+					JasperCompileManager.compileReport(reportStream);
+
+			jasperPrint =
+					JasperFillManager.fillReport(
+							jasperReport,
+							map,
+							new JRBeanCollectionDataSource(
+									invoice.getInvoiceItems(),
+									true
+							)
+					);
+
+			JasperViewer.viewReport(
+					jasperPrint,
+					false
+			);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	private InputStream getFileAsStream(String filePath) throws FileNotFoundException {
@@ -1351,22 +1359,22 @@ public class InvoiceController implements TabContent {
 		if (amount != null) {
 			map.put("discount", amount);
 		}
-		
+
 		amount = invoice.getPaid();
 		if(amount != null) {
 			map.put("paid", amount);
 		}
-		
+
 		amount = invoice.getPrevDueAmount();
 		if(amount != null) {
 			map.put("prevDueAmount", amount);
 		}
-		
+
 		amount = invoice.getTotalDueAmount();
 		if(amount != null) {
 			map.put("totalDueAmount", amount);
 		}
-		
+
 		amount = invoice.getBalance();
 		if(amount != null) {
 			map.put("balance", amount);

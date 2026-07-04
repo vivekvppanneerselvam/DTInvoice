@@ -1,0 +1,70 @@
+.root {
+    -fx-background-color: #f4f6fb;
+    -fx-font-family: "Segoe UI";
+}
+
+.catalog-pane {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+}
+
+.cart-pane {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+    -fx-pref-width: 300;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* ITEM CARD */
+.item-card {
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.item-card:hover {
+    -fx-background-color: #eef2ff;
+}
+
+/* CATEGORY BUTTON */
+.category-btn {
+    -fx-background-color: #e5e7eb;
+    -fx-background-radius: 20;
+    -fx-padding: 5 15;
+}
+
+.category-btn:selected {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+}
+
+/* QTY BUTTON */
+.qty-btn {
+    -fx-background-color: #e5e7eb;
+    -fx-min-width: 28;
+    -fx-min-height: 28;
+}
+
+/* CART CELL */
+.cart-cell {
+    -fx-padding: 10;
+    -fx-border-color: #eee;
+}
+
+/* BUTTON */
+.button {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+}
+
+.checkout-btn {
+    -fx-background-color: #2563eb;
+}

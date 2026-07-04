@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,7 +43,9 @@ public class Config {
         try {
             Stage st = new Stage();
             stage = (Stage) lb.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource(load));
+            URL resourceUrl = getClass().getResource(load);
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            Parent root = loader.load();
             Scene scene = new Scene(root);
             st.initStyle(style);
             st.setResizable(resize);
@@ -60,7 +63,9 @@ public class Config {
         try {
             Stage st = new Stage();
             stage = (Stage) lb.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource(load));
+            URL resourceUrl = getClass().getResource(load);
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            Parent root = loader.load();
             Scene scene = new Scene(root);
             st.initStyle(style);
             st.setResizable(resize);
@@ -75,7 +80,9 @@ public class Config {
 
     public void loadAnchorPane(AnchorPane ap, String a) {
         try {
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/org/view/" + a));
+            URL resourceUrl = getClass().getResource("/org/view/" + a);
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            AnchorPane p = loader.load();
             ap.getChildren().setAll(p);
         } catch (IOException e) {
         }

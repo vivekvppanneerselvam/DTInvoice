@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dt.inventory.SubCategoryController"
+
+            prefWidth="1500"
+            prefHeight="850"
+
+            style="-fx-background-color: #f3f4f6;">
+
+    <top>
+
+        <VBox spacing="15"
+              style="-fx-padding: 20;">
+
+            <Label text="Sub Category Management"
+                   style="-fx-font-size: 24px;
+        -fx-font-weight: bold;"/>
+
+            <HBox spacing="10">
+
+                <TextField fx:id="tfSearch"
+                           promptText="Search sub category..."
+                           HBox.hgrow="ALWAYS"
+                           prefHeight="40"/>
+
+                <Button text="Add Sub Category"
+                        prefHeight="40"
+                        onAction="#onAddSubCategory"/>
+
+            </HBox>
+
+        </VBox>
+
+    </top>
+
+    <center>
+
+        <ScrollPane fitToWidth="true">
+
+            <content>
+
+                <FlowPane fx:id="subCategoryContainer"
+
+                          hgap="20"
+                          vgap="20"
+
+                          prefWrapLength="1200"
+
+                          style="-fx-padding: 20;"/>
+
+            </content>
+
+        </ScrollPane>
+
+    </center>
+
+</BorderPane>

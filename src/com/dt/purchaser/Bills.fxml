@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dt.purchaser.BillsController"
+
+            prefWidth="1600"
+            prefHeight="900"
+
+            style="-fx-background-color: #f3f4f6;">
+
+    <!-- LEFT MENU -->
+    <left>
+
+        <VBox spacing="12"
+              prefWidth="240"
+
+              style="-fx-background-color: white;
+                     -fx-padding: 15;
+                     -fx-border-color: #e5e7eb;">
+
+            <Label text="Bills"
+                   style="-fx-font-size: 22px;
+                          -fx-font-weight: bold;"/>
+
+            <Button text="All Bills"
+                    maxWidth="Infinity"
+                    prefHeight="45"
+                    onAction="#onAllBills"/>
+
+            <Button text="Pending Bills"
+                    maxWidth="Infinity"
+                    prefHeight="45"
+                    onAction="#onPendingBills"/>
+
+            <Button text="Settled Bills"
+                    maxWidth="Infinity"
+                    prefHeight="45"
+                    onAction="#onSettledBills"/>
+
+            <Button text="Add Bill"
+                    maxWidth="Infinity"
+                    prefHeight="45"
+                    onAction="#onAddBill"/>
+
+            <Separator/>
+
+            <!-- SUMMARY -->
+
+            <VBox spacing="10"
+
+                  style="-fx-background-color: #f9fafb;
+                         -fx-padding: 15;
+                         -fx-background-radius: 10;">
+
+                <Label text="Summary"
+                       style="-fx-font-size: 16px;
+                              -fx-font-weight: bold;"/>
+
+                <HBox>
+                    <Label text="Total Bills"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblTotalBills"/>
+                </HBox>
+
+                <HBox>
+                    <Label text="Pending Amount"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblPendingAmount"/>
+                </HBox>
+
+                <HBox>
+                    <Label text="Collected"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblCollected"/>
+                </HBox>
+
+            </VBox>
+
+        </VBox>
+
+    </left>
+
+    <!-- CENTER -->
+    <center>
+
+        <VBox spacing="15"
+              style="-fx-padding: 20;">
+
+            <!-- SEARCH -->
+
+            <HBox spacing="10">
+
+                <TextField fx:id="tfSearch"
+
+                           promptText="Search bill no or purchaser..."
+
+                           HBox.hgrow="ALWAYS"
+
+                           prefHeight="40"/>
+
+            </HBox>
+
+            <!-- BILLS -->
+
+            <ScrollPane fitToWidth="true"
+                        VBox.vgrow="ALWAYS">
+
+                <content>
+
+                    <FlowPane fx:id="billContainer"
+
+                              hgap="20"
+                              vgap="20"
+
+                              prefWrapLength="1200"
+
+                              style="-fx-padding: 10;"/>
+
+                </content>
+
+            </ScrollPane>
+
+        </VBox>
+
+    </center>
+
+</BorderPane>

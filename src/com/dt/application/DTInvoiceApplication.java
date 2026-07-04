@@ -48,7 +48,9 @@ public class DTInvoiceApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws  Exception {
 
-		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("com/dt/view/Login.fxml"));
+		URL loginViewUrl = getClass().getClassLoader().getResource("com/dt/view/Login.fxml");
+		FXMLLoader loader = new FXMLLoader(loginViewUrl);
+		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		//scene.getStylesheets().add(getClass().getClassLoader().getResource("resources/JMetroLightTheme.css").toExternalForm());
 		InputStream iconStream = getClass().getResourceAsStream("/resources/images/icon.png");
@@ -68,12 +70,20 @@ public class DTInvoiceApplication extends Application {
 				Files.createDirectories(path);
 			}		
 			File file = new File(DTInvoiceApplication.class.getClassLoader().getResource("resources/dtinvoice.db").getFile());
-		System.out.println(pathString + file.getName());
-			Files.copy(file.toPath(), (new File(pathString + file.getName())).toPath(),
-					StandardCopyOption.REPLACE_EXISTING);
-			
+			File destFile = new File(pathString + file.getName());
+			System.out.println("Database path: " + pathString + file.getName());
+
+			// Only copy the database if it doesn't already exist
+			// This preserves existing data instead of overwriting it
+			if (!destFile.exists()) {
+				Files.copy(file.toPath(), destFile.toPath());
+				System.out.println("Database initialized for the first time");
+			} else {
+				System.out.println("Database already exists, preserving existing data");
+			}
+
 		} catch (Exception e) {
-			logger.log(Level.SEVERE, "Couldn't create the db directory", e);
+			logger.log(Level.SEVERE, "Couldn't create the db directory or initialize database", e);
 			return;
 		}		
                 

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dt.misc.ExpenseController"
+
+            prefWidth="1800"
+            prefHeight="900"
+
+            style="-fx-background-color:#f3f4f6;">
+
+    <center>
+
+        <HBox spacing="10"
+              style="-fx-padding:10;">
+
+            <!-- ===================================================== -->
+            <!-- LEFT ENTRY PANEL -->
+            <!-- ===================================================== -->
+
+            <VBox prefWidth="380"
+                  spacing="10"
+
+                  style="-fx-background-color:white;
+                         -fx-padding:15;
+                         -fx-border-color:#d1d5db;">
+
+                <Label text="Expense Entry"
+
+                       style="-fx-font-size:22px;
+                              -fx-font-weight:bold;"/>
+
+                <!-- Expense Number -->
+
+                <VBox spacing="4">
+
+                    <Label text="Expense No"/>
+
+                    <TextField fx:id="tfExpenseNo"
+                               editable="false"/>
+                </VBox>
+
+                <!-- Expense Date -->
+
+                <VBox spacing="4">
+
+                    <Label text="Expense Date"/>
+
+                    <DatePicker fx:id="dpExpenseDate"/>
+                </VBox>
+
+                <!-- Expense Type -->
+
+                <VBox spacing="8">
+
+                    <Label text="Expense Type"/>
+
+                    <FlowPane hgap="8"
+                              vgap="8">
+
+                        <ToggleButton fx:id="btnFuel"
+                                      text="Fuel"/>
+
+                        <ToggleButton fx:id="btnFood"
+                                      text="Food"/>
+
+                        <ToggleButton fx:id="btnTransport"
+                                      text="Transport"/>
+
+                        <ToggleButton fx:id="btnInternet"
+                                      text="Internet"/>
+
+                        <ToggleButton fx:id="btnElectricity"
+                                      text="EB Bill"/>
+
+                        <ToggleButton fx:id="btnCourier"
+                                      text="Courier"/>
+
+                        <ToggleButton fx:id="btnPacking"
+                                      text="Packing"/>
+
+                        <ToggleButton fx:id="btnMaintenance"
+                                      text="Maintenance"/>
+
+                        <ToggleButton fx:id="btnMisc"
+                                      text="Misc"/>
+
+                        <ToggleButton fx:id="btnOther"
+                                      text="Other"/>
+
+                    </FlowPane>
+
+                </VBox>
+
+                <!-- OTHER -->
+
+                <VBox spacing="4">
+
+                    <Label text="Other Expense"
+                           fx:id="lblOther"/>
+
+                    <TextField fx:id="tfOtherExpense"/>
+                </VBox>
+
+                <!-- Vendor -->
+
+                <VBox spacing="4">
+
+                    <Label text="Vendor Name"/>
+
+                    <TextField fx:id="tfVendor"/>
+                </VBox>
+
+                <!-- Amount -->
+
+                <VBox spacing="4">
+
+                    <Label text="Amount"/>
+
+                    <TextField fx:id="tfAmount"/>
+                </VBox>
+
+                <!-- Remarks -->
+
+                <VBox spacing="4">
+
+                    <Label text="Remarks"/>
+
+                    <TextArea fx:id="tfRemarks"
+                              prefHeight="100"/>
+                </VBox>
+
+                <!-- Attachment -->
+
+                <VBox spacing="4">
+
+                    <Label text="Bill Attachment (Optional)"/>
+
+                    <HBox spacing="10">
+
+                        <Button text="Choose File"
+                                onAction="#onChooseFile"/>
+
+                        <Label fx:id="lblAttachment"/>
+                    </HBox>
+
+                </VBox>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <VBox spacing="10">
+
+                    <Button text="Save Expense"
+                            maxWidth="Infinity"
+                            prefHeight="45"
+                            onAction="#onSaveExpense"
+
+                            style="-fx-background-color:#2563eb;
+                   -fx-text-fill:white;
+                   -fx-font-weight:bold;"/>
+
+                    <Button text="Reset"
+                            maxWidth="Infinity"
+                            prefHeight="40"
+                            onAction="#onReset"/>
+
+                </VBox>
+            </VBox>
+
+            <!-- ===================================================== -->
+            <!-- RIGHT DASHBOARD -->
+            <!-- ===================================================== -->
+
+            <VBox HBox.hgrow="ALWAYS"
+                  spacing="10">
+
+                <!-- FILTERS -->
+
+                <HBox spacing="10"
+
+                      style="-fx-background-color:white;
+                             -fx-padding:12;
+                             -fx-border-color:#d1d5db;">
+
+                    <ComboBox fx:id="cbDateFilter"
+                              prefWidth="180"/>
+
+                    <ComboBox fx:id="cbTypeFilter"
+                              prefWidth="180"/>
+
+                    <TextField fx:id="tfSearch"
+
+                               promptText="Search Expense"
+
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <!-- TABLE -->
+
+                <TableView fx:id="expenseTable"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn fx:id="colDate"
+                                     text="Date"
+                                     prefWidth="120"/>
+
+                        <TableColumn fx:id="colType"
+                                     text="Type"
+                                     prefWidth="180"/>
+
+                        <TableColumn fx:id="colVendor"
+                                     text="Vendor"
+                                     prefWidth="180"/>
+
+                        <TableColumn fx:id="colAmount"
+                                     text="Amount"
+                                     prefWidth="120"/>
+
+                        <TableColumn fx:id="colRemarks"
+                                     text="Remarks"
+                                     prefWidth="350"/>
+
+                        <TableColumn fx:id="colAttachment"
+                                     text="Bill"
+                                     prefWidth="100"/>
+
+                        <TableColumn fx:id="colAction"
+                                     text="Action"
+                                     prefWidth="220"/>
+
+                    </columns>
+
+                </TableView>
+
+                <!-- SUMMARY -->
+
+                <HBox spacing="20"
+
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-border-color:#d1d5db;">
+
+                    <Label text="Entries :"/>
+
+                    <Label fx:id="lblEntries"
+
+                           style="-fx-font-weight:bold;"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Label text="Total Expense :"/>
+
+                    <Label fx:id="lblTotalExpense"
+
+                           style="-fx-font-size:18px;
+                                  -fx-font-weight:bold;
+                                  -fx-text-fill:#dc2626;"/>
+                </HBox>
+
+            </VBox>
+
+        </HBox>
+
+    </center>
+
+</BorderPane>

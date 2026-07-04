@@ -88,7 +88,7 @@
 	</background>
 	<title>
 		<band height="175" splitType="Stretch">
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField-12" x="50" y="0" width="160" height="18" isRemoveLineWhenBlank="true" uuid="1e02219e-746e-4006-a9bf-04f1fc7b8916"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -101,7 +101,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{firmName} != null ? $P{firmName}.trim() : ""]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField-13" x="50" y="18" width="160" height="22" isRemoveLineWhenBlank="true" uuid="3b7b3bbb-4449-4b44-825f-df43abff8bac"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -114,7 +114,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{firmAddress} != null ? ($P{firmAddress}.trim().replaceAll("\r\n", ", ").replaceAll("\n", ", ")) : ""]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField-14" x="50" y="46" width="160" height="14" isRemoveLineWhenBlank="true" uuid="167ee810-352c-47aa-a679-847362385f8a"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -127,7 +127,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[($P{firmPhoneNumbers} == null || $P{firmPhoneNumbers}.isEmpty()) ? "" :  "Phone Number(s): " + $P{firmPhoneNumbers}.trim()]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField-15" x="54" y="60" width="160" height="14" isRemoveLineWhenBlank="true" uuid="dd5c0f68-f21d-4980-aace-3bb61b836600"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -180,7 +180,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA["AMOUNT"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField-16" x="-3" y="84" width="211" height="14" isRemoveLineWhenBlank="true" uuid="186c71df-0b99-44e1-8909-7488f1662472"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -193,7 +193,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA["CASH BILL"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="103" width="50" height="12" isRemoveLineWhenBlank="true" uuid="b6b4144b-81ec-4a46-87d0-0827531d18ee"/>
 				<textElement markup="html">
 					<font fontName="Monospaced" size="9"/>
@@ -206,42 +206,42 @@
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="115" width="50" height="12" isRemoveLineWhenBlank="true" uuid="d273a793-9744-4a7d-84c6-0a304c1eff12"/>
 				<textElement markup="html">
 					<font fontName="Monospaced" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["BILL NO:"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="127" width="70" height="12" isRemoveLineWhenBlank="true" uuid="bfebcff3-c12d-4213-a110-2351c60d2d41"/>
 				<textElement markup="html">
 					<font fontName="Monospaced" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["CUSTOMER DETAILS:"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="53" y="115" width="50" height="12" isRemoveLineWhenBlank="true" uuid="703914e0-7277-472b-91de-20e484ab0c73"/>
 				<textElement markup="html">
 					<font fontName="Monospaced" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{invoiceNumber}.intValue()]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="53" y="103" width="65" height="12" isRemoveLineWhenBlank="true" uuid="94b36f19-95c9-43d5-8901-65c37c3fda45"/>
 				<textElement markup="html">
 					<font fontName="Monospaced" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{invoiceDate}.format( java.time.format.DateTimeFormatter.ofPattern("dd-MMM-yyyy") )]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="118" y="105" width="50" height="12" isRemoveLineWhenBlank="true" uuid="f9e09c81-7be6-4537-b863-a61975c4b00b"/>
 				<textElement markup="html">
 					<font fontName="Monospaced" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["TIME:"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="161" y="105" width="50" height="12" isRemoveLineWhenBlank="true" uuid="479e11dc-fbe6-46b6-bc4e-51d04c5fab78"/>
 				<textElement markup="html">
 					<font fontName="Monospaced" size="9"/>
@@ -255,7 +255,7 @@
 				</reportElement>
 				<imageExpression><![CDATA[$P{firmLogo}]]></imageExpression>
 			</image>
-			<textField textAdjust="StretchHeight">
+			<textField >
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="78" y="126" width="130" height="15" uuid="b6d893d3-dfbe-4407-a54b-4ac344db38eb">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -276,7 +276,7 @@
 	</columnHeader>
 	<detail>
 		<band height="23" splitType="Stretch">
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="1" y="11" width="69" height="12" isRemoveLineWhenBlank="true" uuid="e63d93f1-96ee-4f14-a6df-290c679f8ddb"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -289,7 +289,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="161" y="10" width="50" height="12" isRemoveLineWhenBlank="true" uuid="60edcc35-f474-45bd-8f76-ef68d2f9e50c"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -302,7 +302,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($V{amount})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="112" y="6" width="44" height="12" uuid="ef537b1f-724a-4613-a552-52aa301a5a56"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -315,7 +315,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($F{rate})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="71" y="11" width="33" height="12" uuid="136f32c4-415e-4927-b427-6ae2a0d6c4f0"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -347,14 +347,14 @@
 	</lastPageFooter>
 	<summary>
 		<band height="182" splitType="Stretch">
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="staticText-5" x="3" y="10" width="67" height="13" uuid="b0bd8927-e29a-4aa1-9abe-d00733d3ae58"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="Monospaced" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["TOTAL:"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="staticText-7" x="2" y="104" width="92" height="13" isRemoveLineWhenBlank="true" uuid="d0b13d87-9a2a-4e6f-b881-c51cd3d1b64e"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="Monospaced" size="9"/>
@@ -367,7 +367,7 @@
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField-1" x="101" y="134" width="105" height="13" isRemoveLineWhenBlank="true" uuid="1ac22f30-b96b-479d-a08d-f89344062819"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -379,7 +379,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{prevDueAmount})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="101" y="104" width="105" height="13" isRemoveLineWhenBlank="true" uuid="ca499c60-19f6-4d3e-a7b6-88dff8fe6d68"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -392,7 +392,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{paid})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="staticText-9" x="0" y="134" width="92" height="13" isRemoveLineWhenBlank="true" uuid="ab21540c-eadf-40b2-98f6-3cdc683cb72f"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="Monospaced" size="9"/>
@@ -405,7 +405,7 @@
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="101" y="121" width="108" height="13" isRemoveLineWhenBlank="true" uuid="224563b5-5758-4a0d-9ebf-e9cddc69ea0a"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -418,14 +418,14 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{balance})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="staticText-7" x="0" y="117" width="92" height="17" isRemoveLineWhenBlank="true" uuid="651d2049-cf8f-423b-8a26-a36bf3e5d4ee"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="Monospaced" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Balance Amount"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField-1" positionType="Float" x="-2" y="170" width="211" height="12" isRemoveLineWhenBlank="true" uuid="4607d3dd-56b0-4f8d-93a7-b8d74f31c275"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -437,14 +437,14 @@
 				</textElement>
 				<textFieldExpression><![CDATA["*** Thank you visit again ***"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="staticText-9" x="2" y="147" width="92" height="13" isRemoveLineWhenBlank="true" uuid="c6fd8b99-b77e-48c6-9863-8f8901a593a7"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="Monospaced" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Total Due Amount:"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField-1" x="101" y="147" width="108" height="13" isRemoveLineWhenBlank="true" uuid="cb46c2f6-87c9-448f-81ca-f2bc02069b41"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -456,7 +456,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{totalDueAmount})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="133" y="9" width="76" height="13" uuid="ac8320da-4ce1-48ca-a966-5e8ffb08e646"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -469,7 +469,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($V{amountTotal})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="80" y="10" width="32" height="12" uuid="0b7e1006-83fd-4372-a975-d99a3e5e4211"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -488,7 +488,7 @@
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="1" y="30" width="122" height="12" uuid="fceee2b3-fe94-4c93-9816-1fc137d1be04">
 					<printWhenExpression><![CDATA[$P{additionalCharge} != null && $P{additionalCharge}.signum() == 1]]></printWhenExpression>
 				</reportElement>
@@ -503,7 +503,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA["+(Plus)Additional Charge (in)"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="2" y="46" width="121" height="12" uuid="4fa29951-d11e-48c8-9b55-ec9c8e38ce3c">
 					<printWhenExpression><![CDATA[$P{discount} != null && $P{discount}.signum() == 1]]></printWhenExpression>
 				</reportElement>
@@ -518,7 +518,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA["-(minus) Discount:"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="133" y="30" width="73" height="13" uuid="feb60652-716a-4268-bb41-c0837bd8cf66">
 					<printWhenExpression><![CDATA[$P{additionalCharge} != null && $P{additionalCharge}.signum() == 1]]></printWhenExpression>
 				</reportElement>
@@ -533,7 +533,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{additionalCharge})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="133" y="46" width="74" height="13" uuid="473e382f-647e-454a-af93-b0f3abe4e702">
 					<printWhenExpression><![CDATA[$P{discount} != null && $P{discount}.signum() == 1]]></printWhenExpression>
 				</reportElement>
@@ -548,7 +548,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{discount})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="2" y="60" width="121" height="12" uuid="118dc9c5-617f-4ef0-aaab-f0505001394f"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -561,7 +561,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA["Net Amount:"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField  isBlankWhenNull="true">
 				<reportElement key="textField" x="133" y="60" width="74" height="13" uuid="d43bae9c-ad1e-4d99-9c9f-cf13d2de099c"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -580,7 +580,7 @@
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
-			<textField textAdjust="StretchHeight">
+			<textField >
 				<reportElement stretchType="RelativeToTallestObject" x="3" y="73" width="207" height="16" uuid="4904e990-686d-464f-a286-c4959da1fbac">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>

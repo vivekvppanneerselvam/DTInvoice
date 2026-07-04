@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dt.purchaser.PurchaserController"
+
+            prefWidth="1850"
+            prefHeight="980"
+
+            style="-fx-background-color:#f3f4f6;">
+
+    <center>
+
+        <HBox spacing="0">
+
+            <!-- ===================================================== -->
+            <!-- LEFT FORM PANEL -->
+            <!-- ===================================================== -->
+
+            <VBox prefWidth="390"
+                  minWidth="360"
+                  maxWidth="420"
+
+                  spacing="10"
+
+                  style="-fx-background-color:white;
+                         -fx-padding:12;
+                         -fx-border-color:#d1d5db;
+                         -fx-border-width:0 1 0 0;">
+
+                <Label text="Purchaser Details"
+                       style="-fx-font-size:22px;
+                              -fx-font-weight:bold;"/>
+
+                <!-- CODE -->
+
+                <VBox spacing="4">
+
+                    <Label text="Purchaser Code"
+                           style="-fx-font-size:11px;
+                                  -fx-font-weight:bold;"/>
+
+                    <TextField fx:id="tfCode"
+                               editable="false"
+                               prefHeight="35"/>
+
+                </VBox>
+
+                <!-- NAME -->
+
+                <VBox spacing="4">
+
+                    <Label text="Purchaser Name"
+                           style="-fx-font-size:11px;
+                                  -fx-font-weight:bold;"/>
+
+                    <TextField fx:id="tfName"
+                               prefHeight="35"/>
+
+                </VBox>
+
+                <!-- MOBILE -->
+
+                <HBox spacing="10">
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="Mobile"
+                               style="-fx-font-size:11px;
+                                      -fx-font-weight:bold;"/>
+
+                        <TextField fx:id="tfMobile"
+                                   prefHeight="35"/>
+
+                    </VBox>
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="GSTIN"
+                               style="-fx-font-size:11px;
+                                      -fx-font-weight:bold;"/>
+
+                        <TextField fx:id="tfGST"
+                                   prefHeight="35"/>
+
+                    </VBox>
+
+                </HBox>
+
+                <!-- ADDRESS -->
+
+                <VBox spacing="4">
+
+                    <Label text="Address"
+                           style="-fx-font-size:11px;
+                                  -fx-font-weight:bold;"/>
+
+                    <TextArea fx:id="tfAddress"
+                              prefHeight="90"/>
+
+                </VBox>
+
+                <!-- SUMMARY -->
+
+                <HBox spacing="10">
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="Pending Amount"
+                               style="-fx-font-size:11px;
+                                      -fx-font-weight:bold;"/>
+
+                        <TextField fx:id="tfPending"
+                                   editable="false"/>
+                    </VBox>
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="Total Bills"
+                               style="-fx-font-size:11px;
+                                      -fx-font-weight:bold;"/>
+
+                        <TextField fx:id="tfBills"
+                                   editable="false"/>
+                    </VBox>
+
+                </HBox>
+
+                <HBox spacing="10">
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="Total Purchase"
+                               style="-fx-font-size:11px;
+                                      -fx-font-weight:bold;"/>
+
+                        <TextField fx:id="tfPurchase"
+                                   editable="false"/>
+                    </VBox>
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="Total Paid"
+                               style="-fx-font-size:11px;
+                                      -fx-font-weight:bold;"/>
+
+                        <TextField fx:id="tfPaid"
+                                   editable="false"/>
+                    </VBox>
+
+                </HBox>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <!-- BUTTONS -->
+
+                <GridPane hgap="10"
+                          vgap="10">
+
+                    <columnConstraints>
+
+                        <ColumnConstraints hgrow="ALWAYS"/>
+
+                        <ColumnConstraints hgrow="ALWAYS"/>
+
+                    </columnConstraints>
+
+                    <Button text="Save Purchaser"
+                            onAction="#onSave"
+
+                            maxWidth="Infinity"
+                            prefHeight="42"
+
+                            GridPane.columnIndex="0"/>
+
+                    <Button text="Reset"
+                            onAction="#onReset"
+
+                            maxWidth="Infinity"
+                            prefHeight="42"
+
+                            GridPane.columnIndex="1"/>
+
+                    <Button text="Delete Purchaser"
+                            onAction="#onDelete"
+
+                            maxWidth="Infinity"
+                            prefHeight="42"
+
+                            GridPane.rowIndex="1"
+                            GridPane.columnSpan="2"/>
+                </GridPane>
+
+            </VBox>
+
+            <!-- ===================================================== -->
+            <!-- RIGHT PANEL -->
+            <!-- ===================================================== -->
+
+            <VBox HBox.hgrow="ALWAYS">
+
+                <!-- HEADER -->
+
+                <VBox spacing="8"
+
+                      style="-fx-background-color:white;
+                             -fx-padding:12;
+                             -fx-border-color:#d1d5db;
+                             -fx-border-width:0 0 1 0;">
+
+                    <HBox alignment="CENTER_LEFT">
+
+                        <VBox spacing="2">
+
+                            <Label text="Purchaser Management"
+                                   style="-fx-font-size:22px;
+                                          -fx-font-weight:bold;"/>
+
+                            <Label text="Purchase • Credit • Ledger Management"/>
+
+                        </VBox>
+
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <TextField fx:id="tfSearch"
+                                   promptText="Search Purchaser / Mobile / GST"
+
+                                   prefWidth="350"
+                                   prefHeight="40"/>
+
+                    </HBox>
+
+                </VBox>
+
+                <!-- SUMMARY CARDS -->
+
+                <HBox spacing="15"
+
+                      style="-fx-padding:15;">
+
+                    <VBox style="-fx-background-color:white;-fx-padding:15;"
+                          prefWidth="220">
+
+                        <Label text="Total Purchasers"/>
+                        <Label fx:id="lblTotalPurchasers"/>
+                    </VBox>
+
+                    <VBox style="-fx-background-color:white;-fx-padding:15;"
+                          prefWidth="220">
+
+                        <Label text="Credit Purchasers"/>
+                        <Label fx:id="lblCreditPurchasers"/>
+                    </VBox>
+
+                    <VBox style="-fx-background-color:white;-fx-padding:15;"
+                          prefWidth="220">
+
+                        <Label text="Pending Amount"/>
+                        <Label fx:id="lblPendingAmount"/>
+                    </VBox>
+
+                </HBox>
+
+                <!-- TABLE -->
+
+                <VBox VBox.vgrow="ALWAYS"
+                      style="-fx-padding:12;">
+
+                    <TableView fx:id="purchaserTable"
+                               VBox.vgrow="ALWAYS">
+
+                        <columns>
+
+                            <TableColumn fx:id="colCode"
+                                         text="Code"
+                                         prefWidth="120"/>
+
+                            <TableColumn fx:id="colName"
+                                         text="Purchaser Name"
+                                         prefWidth="260"/>
+
+                            <TableColumn fx:id="colMobile"
+                                         text="Mobile"
+                                         prefWidth="140"/>
+
+                            <TableColumn fx:id="colGST"
+                                         text="GSTIN"
+                                         prefWidth="180"/>
+
+                            <TableColumn fx:id="colPending"
+                                         text="Pending"
+                                         prefWidth="120"/>
+
+                            <TableColumn fx:id="colBills"
+                                         text="Bills"
+                                         prefWidth="100"/>
+
+                            <TableColumn fx:id="colAction"
+                                         text="Action"
+                                         prefWidth="150"/>
+
+                            <TableColumn fx:id="colPurchase"
+                                         text="Purchase Amount"
+                                         prefWidth="150"/>
+
+                            <TableColumn fx:id="colPaid"
+                                         text="Paid Amount"
+                                         prefWidth="150"/>
+
+                            <TableColumn fx:id="colLastPurchase"
+                                         text="Last Purchase"
+                                         prefWidth="150"/>
+
+                        </columns>
+
+                    </TableView>
+
+                </VBox>
+
+            </VBox>
+
+        </HBox>
+
+    </center>
+
+</BorderPane>

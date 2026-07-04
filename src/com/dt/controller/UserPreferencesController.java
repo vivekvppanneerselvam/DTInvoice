@@ -156,7 +156,7 @@ public class UserPreferencesController implements TabContent {
         if (!Global.setUserPreferences(preferences)) {
             String message = "An error occurred in saving user preferences." +
                     "\nPlease ensure that you are running this application with " +
-                    "Administrative Priviliges.";
+                    "Administrative Priviliges. heheh";
             
             Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
             alert.setTitle("Error Occurred");

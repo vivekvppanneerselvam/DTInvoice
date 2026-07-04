@@ -26,6 +26,41 @@ logo blob(512K))
     private String phoneNumbers;
     private String emailAddress;
     private byte[] logo;
+    private String firmSubName;
+    private String gstNumber;
+    private String fssaiNumber;
+    private String reviewUrl;
+
+    public String getReviewUrl() {
+        return reviewUrl;
+    }
+
+    public void setReviewUrl(String reviewUrl) {
+        this.reviewUrl = reviewUrl;
+    }
+    public String getFirmSubName() {
+        return firmSubName;
+    }
+
+    public void setFirmSubName(String firmSubName) {
+        this.firmSubName = firmSubName;
+    }
+
+    public String getGstNumber() {
+        return gstNumber;
+    }
+
+    public void setGstNumber(String gstNumber) {
+        this.gstNumber = gstNumber;
+    }
+
+    public String getFssaiNumber() {
+        return fssaiNumber;
+    }
+
+    public void setFssaiNumber(String fssaiNumber) {
+        this.fssaiNumber = fssaiNumber;
+    }
     
     public String getFirmName() {
         return firmName;

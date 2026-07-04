@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
+<?import javafx.scene.image.*?>
 
 <BorderPane id="rootPane" xmlns="http://javafx.com/javafx/8.0.65" 
             xmlns:fx="http://javafx.com/fxml/1"
@@ -19,37 +20,131 @@
          <children>
             <MenuBar>
               <menus>
-                <Menu fx:id="fileMenu" mnemonicParsing="true" text="_File">
+                 <Menu fx:id="fileMenu" mnemonicParsing="true" text="_File">
                      <items>
-                         <MenuItem fx:id="createFinancialYearMenuItem" onAction="#onCreateFinancialYearAction"
-                           text="_Create Financial Year..."  mnemonicParsing="true"  accelerator="SHORTCUT+SHIFT+C"  /> 
-                         <MenuItem fx:id="openFinancialYearMenuItem" onAction="#onOpenFinancialYearAction"
-                           text="_Open Financial Year..."  mnemonicParsing="true" accelerator="SHORTCUT+SHIFT+O" /> 
-                           <MenuItem fx:id="closeFinancialYearMenuItem" onAction="#onCloseFinancialYearAction"
-                           text="Close _Financial Year"  mnemonicParsing="true" /> 
-                          <MenuItem fx:id="deleteFinancialYearMenuItem" 
-                            onAction="#onDeleteFinancialYearAction"
-                           text="Delete Financial Year..."  /> 
-                         <SeparatorMenuItem />
-                        <MenuItem fx:id="firmDetailsMenuItem"  mnemonicParsing="true" 
-                                  onAction="#onFirmDetailsCommand" text="Fir_m Details" />
-                        <MenuItem fx:id="measurementUnitsMenuItem" text="_Measurement Units"
-                                  mnemonicParsing="true" onAction="#onMeasurementUnitsCommmand" accelerator="SHORTCUT+SHIFT+M" />
-                        <MenuItem fx:id="itemsMenuItem" text="_Items" mnemonicParsing="true" 
-                                  onAction="#onItemsCommmand" accelerator="SHORTCUT+SHIFT+T" />
-                        <SeparatorMenuItem  />
-                        <MenuItem fx:id="exitMenuItem" mnemonicParsing="true" 
-                                  onAction="#onExitCommand" text="E_xit" accelerator="SHORTCUT+SHIFT+X" />
+                          <MenuItem fx:id="createFinancialYearMenuItem" onAction="#onCreateFinancialYearAction"
+                            text="_Create Financial Year..."  mnemonicParsing="true"  accelerator="SHORTCUT+SHIFT+C">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/create_year.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                          </MenuItem>
+                          <MenuItem fx:id="openFinancialYearMenuItem" onAction="#onOpenFinancialYearAction"
+                            text="_Open Financial Year..."  mnemonicParsing="true" accelerator="SHORTCUT+SHIFT+O">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/open_24.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                          </MenuItem>
+                            <MenuItem fx:id="closeFinancialYearMenuItem" onAction="#onCloseFinancialYearAction"
+                            text="Close _Financial Year"  mnemonicParsing="true">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/close_year_24.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            </MenuItem>
+                           <MenuItem fx:id="deleteFinancialYearMenuItem"
+                             onAction="#onDeleteFinancialYearAction"
+                            text="Delete Financial Year...">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/delete_24.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            </MenuItem>
+                          <SeparatorMenuItem />
+                         <MenuItem fx:id="firmDetailsMenuItem"  mnemonicParsing="true"
+                                   onAction="#onFirmDetailsCommand" text="Fir_m Details">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/shop_24.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                         </MenuItem>
+                         <MenuItem fx:id="measurementUnitsMenuItem" text="_Measurement Units"
+                                   mnemonicParsing="true" onAction="#onMeasurementUnitsCommmand" accelerator="SHORTCUT+SHIFT+M">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/measurement_unit.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                         </MenuItem>
+                         <MenuItem fx:id="itemsMenuItem" text="_Items" mnemonicParsing="true"
+                                   onAction="#onItemsCommmand" accelerator="SHORTCUT+SHIFT+T">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/item.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                         </MenuItem>
+                         <SeparatorMenuItem  />
+                         <MenuItem fx:id="exitMenuItem" mnemonicParsing="true"
+                                   onAction="#onExitCommand" text="E_xit" accelerator="SHORTCUT+SHIFT+X">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/exit.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                         </MenuItem>
+                      </items>
+                 </Menu>
+                 <Menu mnemonicParsing="true" text="_Invoice">
+                   <items>
+                     <MenuItem mnemonicParsing="true" text="_Create Invoice" accelerator="SHORTCUT+SHIFT+I"
+                        fx:id="createInvoiceMenuItem"  onAction="#onCreateInvoiceAction" />
+                       <MenuItem mnemonicParsing="true" text="_Modern_Create Invoice" accelerator="SHORTCUT+SHIFT+M"
+                                 fx:id="createModernInvoiceMenuItem"  onAction="#onCreateModernInvoiceAction" />
+                       <MenuItem mnemonicParsing="true" text="_Modern_Search Invoice" accelerator="SHORTCUT+SHIFT+M"
+                                 fx:id="searchModernInvoiceMenuItem"  onAction="#onSearchModernInvoiceAction" />
+                       <MenuItem mnemonicParsing="true" text="_Search Invoice" accelerator="SHORTCUT+SHIFT+V"
+                       fx:id="searchInvoiceMenuItem" onAction="#onSearchInvoiceAction" />
+                   </items>
+                 </Menu>
+                 <Menu fx:id="customerManagementMenu" mnemonicParsing="true" text="C_ustomer Management">
+                     <items>
+                         <MenuItem mnemonicParsing="true" text="_Customer_Management" accelerator="SHORTCUT+SHIFT+P"
+                                   fx:id="createCustomerManagementMenuItem"  onAction="#onCreateCustomerManagementAction" />
+                         <MenuItem mnemonicParsing="true" text="_Items_Inventory_Management" accelerator="SHORTCUT+SHIFT+L"
+                                   fx:id="createItemInventoryManagementInvoiceMenuItem"  onAction="#onCreateItemInventoryManagementInvoiceAction" />
                      </items>
-                </Menu>
-                <Menu mnemonicParsing="true" text="_Invoice">
-                  <items>
-                    <MenuItem mnemonicParsing="true" text="_Create Invoice" accelerator="SHORTCUT+SHIFT+I" 
-                       fx:id="createInvoiceMenuItem"  onAction="#onCreateInvoiceAction" />
-                    <MenuItem mnemonicParsing="true" text="_Search Invoice" accelerator="SHORTCUT+SHIFT+V" 
-                      fx:id="searchInvoiceMenuItem" onAction="#onSearchInvoiceAction" />
-                  </items>
-                </Menu>
+                 </Menu>
+                 <Menu fx:id="supplierMenu" mnemonicParsing="true" text="_Supplier">
+                     <items>
+                         <MenuItem mnemonicParsing="true" text="P_urchaser_Management" accelerator="SHORTCUT+SHIFT+P"
+                                   fx:id="createPurchaserManagementInvoiceMenuItem"  onAction="#onCreatePurchaserManagementInvoiceAction" />
+                     </items>
+                 </Menu>
+                  <Menu fx:id="expenseMenu" mnemonicParsing="true" text="_Expense">
+                      <items>
+                          <MenuItem mnemonicParsing="true" text="E_xpense_Management" accelerator="SHORTCUT+SHIFT+E"
+                                    fx:id="createExpenseManagementMenuItem"  onAction="#onCreateExpenseManagementAction" />
+                      </items>
+                  </Menu>
+                 <Menu fx:id="salesAnalyticsMenu" mnemonicParsing="true" text="_Sales Analytics">
+                     <items>
+                         <MenuItem mnemonicParsing="true" text="Sales _Analytics" accelerator="SHORTCUT+SHIFT+A"
+                                   fx:id="createSalesAnalyticsMenuItem"  onAction="#onCreateSalesAnalyticsAction" />
+                     </items>
+                 </Menu>
                 <Menu fx:id="paymentsMenu" mnemonicParsing="true" text="_Payments">
                     <items>
                         <MenuItem fx:id="paymentReceivedMenuItem" text="Receive Payment" accelerator="SHORTCUT+SHIFT+P" 
@@ -103,6 +198,53 @@
                         <Tooltip text="Create Invoice" />
                     </tooltip>
                 </Label>
+                  <!-- modern invoice -->
+                  <Label fx:id="lblModernCreateInvoice" onMouseClicked="#onCreateModernInvoiceCommand" >
+                      <tooltip>
+                          <Tooltip text="Create Modern Invoice" />
+                      </tooltip>
+                  </Label>
+
+                  <Label fx:id="lblModernSearchInvoice" onMouseClicked="#onSearchModernInvoiceCommand" >
+                      <tooltip>
+                          <Tooltip text="Search Modern Invoice" />
+                      </tooltip>
+                  </Label>
+                  <!-- modern purchaser Management -->
+                  <Label fx:id="lblPurchaserManagement" onMouseClicked="#onPurchaserManagementCommand" >
+                      <tooltip>
+                          <Tooltip text="Purchaser Management" />
+                      </tooltip>
+                  </Label>
+
+                  <!-- modern Expenses Management -->
+                  <Label fx:id="lblExpensesManagement" onMouseClicked="#onExpensesManagementCommand" >
+                      <tooltip>
+                          <Tooltip text="Expense Management" />
+                      </tooltip>
+                  </Label>
+
+                  <!-- Items Inventory Management -->
+                  <Label fx:id="lblItemsInventoryManagement" onMouseClicked="#onItemsInventoryManagementCommand" >
+                      <tooltip>
+                          <Tooltip text="Items Inventory Management" />
+                      </tooltip>
+                  </Label>
+
+                  <!-- Customer Management -->
+                  <Label fx:id="lblCustomerManagement" onMouseClicked="#onCustomerManagementCommand" >
+                      <tooltip>
+                          <Tooltip text="Customer  Management" />
+                      </tooltip>
+                  </Label>
+
+                  <!-- Customer Management -->
+                  <Label fx:id="lblSalesAnalytics" onMouseClicked="#onSalesAnalyticsCommand" >
+                      <tooltip>
+                          <Tooltip text="Sales  Analytics" />
+                      </tooltip>
+                  </Label>
+
                 <Label fx:id="lblSearchInvoice" onMouseClicked="#onSearchInvoicesCommand">
                     <tooltip>
                         <Tooltip text="Search Invoices" />

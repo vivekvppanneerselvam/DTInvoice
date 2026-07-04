@@ -74,6 +74,20 @@ public class HomeController {
     @FXML
     private MenuItem createInvoiceMenuItem;
     @FXML
+    private MenuItem createModernInvoiceMenuItem;
+    @FXML
+    private MenuItem searchModernInvoiceMenuItem;
+    @FXML
+    private MenuItem createPurchaserManagementInvoiceMenuItem;
+    @FXML
+    private MenuItem createExpenseManagementMenuItem;
+    @FXML
+    private MenuItem createItemInventoryManagementInvoiceMenuItem;
+    @FXML
+    private MenuItem createSalesAnalyticsMenuItem;
+    @FXML
+    private MenuItem createCustomerManagementMenuItem;
+    @FXML
     private MenuItem searchInvoiceMenuItem;
     @FXML
     private MenuItem paymentReceivedMenuItem;
@@ -91,6 +105,12 @@ public class HomeController {
     private MenuItem closeFinancialYearMenuItem;
     @FXML
     private MenuItem compactDatabaseMenuItem;
+    @FXML
+    private Menu customerManagementMenu;
+    @FXML
+    private Menu supplierMenu;
+    @FXML
+    private Menu salesAnalyticsMenu;
 
     
     public void initialize() {
@@ -124,13 +144,24 @@ public class HomeController {
             itemsMenuItem, createInvoiceMenuItem, searchInvoiceMenuItem,
             paymentReceivedMenuItem, paymentSearchMenuItem,
             customersMenuItem, customerAccountMenuItem, backupDatabaseMenuItem,
-            closeFinancialYearMenuItem, compactDatabaseMenuItem
+            closeFinancialYearMenuItem, compactDatabaseMenuItem,
+            createCustomerManagementMenuItem, createItemInventoryManagementInvoiceMenuItem,
+            createPurchaserManagementInvoiceMenuItem, createSalesAnalyticsMenuItem, createExpenseManagementMenuItem
         };
         
         for(MenuItem menuItem : menuItems) {
             menuItem.disableProperty().bind(Global.activeYearProperty().isNull());
         }
         
+        // Bind new top-level menus to disable based on financial year selection
+        final Menu[] menus = new Menu[] {
+            customerManagementMenu, supplierMenu, salesAnalyticsMenu
+        };
+
+        for(Menu menu : menus) {
+            menu.disableProperty().bind(Global.activeYearProperty().isNull());
+        }
+
     }
 
     @FXML
@@ -163,6 +194,39 @@ public class HomeController {
     @FXML
     private void onCreateInvoiceAction(ActionEvent event) {
         addTab("Invoice", "New Invoice");
+    }
+
+    @FXML
+    private void onCreateModernInvoiceAction(ActionEvent event) {
+        addTab("ModernInvoice", "New Modern Invoice");
+    }
+
+    @FXML
+    private void onSearchModernInvoiceAction(ActionEvent event) {
+        addTab("ModernInvoiceList", "New Search Invoice");
+    }
+
+    @FXML
+    private void onCreatePurchaserManagementInvoiceAction(ActionEvent event) {
+        addTab("../purchaser/Purchaser", "Purchaser Management");
+    }
+    @FXML
+    private void onCreateExpenseManagementAction(ActionEvent event) {
+        addTab("../misc/MiscDasboard", "Expense Management");
+    }
+    @FXML
+    private void onCreateItemInventoryManagementInvoiceAction(ActionEvent event) {
+        addTab("../inventory/ModernItems", "Items Inventory Management");
+    }
+
+    @FXML
+    private void onCreateCustomerManagementAction(ActionEvent event) {
+        addTab("../customer/CustomerManagement", "Items Inventory Management");
+    }
+
+    @FXML
+    private void onCreateSalesAnalyticsAction(ActionEvent event) {
+        addTab("../sales/SalesDashboard", "Items Inventory Management");
     }
 
     @FXML
@@ -378,6 +442,63 @@ public class HomeController {
              createInvoiceMenuItem.fire();
          }
     }
+
+    @FXML
+    private void onCreateModernInvoiceCommand(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY &&
+                event.getClickCount() == 1) {
+            createModernInvoiceMenuItem.fire();
+        }
+    }
+
+    @FXML
+    private void onSearchModernInvoiceCommand(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY &&
+                event.getClickCount() == 1) {
+            searchModernInvoiceMenuItem.fire();
+        }
+    }
+
+    @FXML
+    private void onPurchaserManagementCommand(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY &&
+                event.getClickCount() == 1) {
+            createPurchaserManagementInvoiceMenuItem.fire();
+        }
+    }
+
+    @FXML
+    private void onExpensesManagementCommand(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY &&
+                event.getClickCount() == 1) {
+            createExpenseManagementMenuItem.fire();
+        }
+    }
+
+    @FXML
+    private void onItemsInventoryManagementCommand(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY &&
+                event.getClickCount() == 1) {
+            createItemInventoryManagementInvoiceMenuItem.fire();
+        }
+    }
+
+    @FXML
+    private void onCustomerManagementCommand(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY &&
+                event.getClickCount() == 1) {
+            createCustomerManagementMenuItem.fire();
+        }
+    }
+
+    @FXML
+    private void onSalesAnalyticsCommand(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY &&
+                event.getClickCount() == 1) {
+            createSalesAnalyticsMenuItem.fire();
+        }
+    }
+
     
     @FXML
     private void onSearchInvoicesCommand(MouseEvent event) {

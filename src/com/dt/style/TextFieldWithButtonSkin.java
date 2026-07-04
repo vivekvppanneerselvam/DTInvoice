@@ -1,113 +1,66 @@
 package com.dt.style;
 
-import com.sun.javafx.scene.control.skin.TextFieldSkin;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Region;
 
-/**
- * Created by pedro_000 on 12/15/13.
- */
-public class TextFieldWithButtonSkin extends TextFieldSkin {
-    protected TextField textField;
-    private StackPane rightButton;
-    private Region rightButtonGraphic;
+public class TextFieldWithButtonSkin extends StackPane {
 
-    public TextFieldWithButtonSkin(TextField textField) {
-        super(textField);
+    private final TextField textField;
+    private final StackPane rightButton;
+    private final Region rightButtonGraphic;
 
-        this.textField = textField;
+    public TextFieldWithButtonSkin() {
+        this.textField = new TextField();
 
         rightButton = new StackPane();
-        rightButton.getStyleClass().setAll("right-button");
+        rightButton.getStyleClass().add("right-button");
         rightButton.setFocusTraversable(false);
 
         rightButtonGraphic = new Region();
-        rightButtonGraphic.getStyleClass().setAll("right-button-graphic");
-        rightButtonGraphic.setFocusTraversable(false);
+        rightButtonGraphic.getStyleClass().add("right-button-graphic");
 
-        rightButtonGraphic.setMaxWidth(Region.USE_PREF_SIZE);
-        rightButtonGraphic.setMaxHeight(Region.USE_PREF_SIZE);
-
-        rightButton.setVisible(false);
-        rightButtonGraphic.setVisible(false);
+        rightButtonGraphic.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         rightButton.getChildren().add(rightButtonGraphic);
-        getChildren().add(rightButton);
+
+        // initially hidden
+        rightButton.setVisible(false);
+
+        getChildren().addAll(textField, rightButton);
+        StackPane.setAlignment(rightButton, Pos.CENTER_RIGHT);
 
         setupListeners();
     }
 
     private void setupListeners() {
 
-        final TextField textField = getSkinnable();
-        rightButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                rightButtonPressed();
-            }
-        });
-        rightButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                rightButtonReleased();
-            }
-        });
+        ChangeListener<Object> updater = (obs, oldVal, newVal) -> updateButtonVisibility();
 
-        textField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                textChanged();
-            }
-        });
-        textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                focusChanged();
-            }
-        });
+        textField.textProperty().addListener(updater);
+        textField.focusedProperty().addListener(updater);
+
+        rightButton.setOnMousePressed(e -> rightButtonPressed());
+        rightButton.setOnMouseReleased(e -> rightButtonReleased());
     }
 
-    protected void textChanged() {
-        if (textField.getText() == null)
-            return;
+    private void updateButtonVisibility() {
+        boolean visible = textField.isFocused() &&
+                textField.getText() != null &&
+                !textField.getText().isEmpty();
 
-        rightButton.setVisible(!textField.getText().isEmpty());
-        rightButtonGraphic.setVisible(!textField.getText().isEmpty());
-    }
-
-    protected void focusChanged() {
-        if (textField.getText() == null)
-            return;
-
-        rightButton.setVisible(textField.isFocused() && !textField.getText().isEmpty());
-        rightButtonGraphic.setVisible(textField.isFocused() && !textField.getText().isEmpty());
-    }
-
-    @Override
-    protected void layoutChildren(double x, double y, double w, double h) {
-        super.layoutChildren(x, y, w, h);
-
-        final double clearGraphicWidth = snapSize(rightButtonGraphic.prefWidth(-1));
-        final double clearButtonWidth = rightButton.snappedLeftInset() + clearGraphicWidth + rightButton.snappedRightInset();
-
-        rightButton.resize(clearButtonWidth, h);
-        positionInArea(rightButton,
-                (x + w) - clearButtonWidth, y,
-                clearButtonWidth, h, 0, HPos.CENTER, VPos.CENTER);
+        rightButton.setVisible(visible);
     }
 
     protected void rightButtonPressed() {
     }
 
     protected void rightButtonReleased() {
-
     }
 
+    public TextField getTextField() {
+        return textField;
+    }
 }

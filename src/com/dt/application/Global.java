@@ -220,7 +220,7 @@ public abstract class Global {
             node.putBoolean(KEY_SHOW_PRINT_DIALOG, preferences.getShowPrintDialog());
             node.putBoolean(KEY_AUTO_LOAD_LAST_OPENED_YEAR, 
                 preferences.getAutoOpenLastOpenedYear());
-            node.flush();
+
         } catch (Exception e) {
             logger.logp(Level.SEVERE, Global.class.getName(), "setUserPreferences",
                     "Error in saving user preferences", e);

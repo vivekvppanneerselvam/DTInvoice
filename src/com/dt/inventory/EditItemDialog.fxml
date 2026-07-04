@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.dt.inventory.EditItemDialogController"
+
+      spacing="15"
+
+      prefWidth="750"
+
+      style="-fx-background-color: white;
+             -fx-padding: 20;">
+
+    <Label text="Edit Item"
+           style="-fx-font-size: 24px;
+                  -fx-font-weight: bold;"/>
+
+    <GridPane hgap="15"
+              vgap="15">
+
+        <Label text="Item Code"
+               GridPane.rowIndex="0"
+               GridPane.columnIndex="0"/>
+
+        <TextField fx:id="tfItemCode"
+                   editable="false"
+                   GridPane.rowIndex="0"
+                   GridPane.columnIndex="1"/>
+
+        <Label text="Item Name"
+               GridPane.rowIndex="1"
+               GridPane.columnIndex="0"/>
+
+        <TextField fx:id="tfItemName"
+                   GridPane.rowIndex="1"
+                   GridPane.columnIndex="1"/>
+
+        <Label text="Category"
+               GridPane.rowIndex="2"
+               GridPane.columnIndex="0"/>
+
+        <ComboBox fx:id="cbCategory"
+                  prefWidth="250"
+                  GridPane.rowIndex="2"
+                  GridPane.columnIndex="1"/>
+
+        <Label text="Sub Category"
+               GridPane.rowIndex="3"
+               GridPane.columnIndex="0"/>
+
+        <ComboBox fx:id="cbSubCategory"
+                  prefWidth="250"
+                  GridPane.rowIndex="3"
+                  GridPane.columnIndex="1"/>
+
+        <CheckBox fx:id="chkGST"
+                  text="GST Applicable"
+                  GridPane.rowIndex="4"
+                  GridPane.columnIndex="1"/>
+
+        <Label text="GST %"
+               GridPane.rowIndex="5"
+               GridPane.columnIndex="0"/>
+
+        <TextField fx:id="tfGST"
+                   GridPane.rowIndex="5"
+                   GridPane.columnIndex="1"/>
+
+        <Button text="Change Image"
+                onAction="#onUploadImage"
+                GridPane.rowIndex="6"
+                GridPane.columnIndex="1"/>
+
+    </GridPane>
+
+    <!-- MEASUREMENTS -->
+
+    <Label text="Measurements"
+           style="-fx-font-size: 18px;
+                  -fx-font-weight: bold;"/>
+
+    <TableView fx:id="measurementTable"
+               prefHeight="250">
+
+        <columns>
+
+            <TableColumn fx:id="colQty"
+                         text="Qty"
+                         prefWidth="80"/>
+
+            <TableColumn fx:id="colUnit"
+                         text="Unit"
+                         prefWidth="100"/>
+
+            <TableColumn fx:id="colSelling"
+                         text="Selling"
+                         prefWidth="120"/>
+
+            <TableColumn fx:id="colPurchase"
+                         text="Purchase"
+                         prefWidth="120"/>
+
+            <TableColumn fx:id="colStock"
+                         text="Stock"
+                         prefWidth="120"/>
+
+        </columns>
+
+    </TableView>
+
+    <HBox spacing="10">
+
+        <Button text="Add Measurement"
+                onAction="#onAddMeasurement"/>
+
+        <Button text="Edit Measurement"
+                onAction="#onEditMeasurement"/>
+
+        <Button text="Delete Measurement"
+                onAction="#onDeleteMeasurement"/>
+
+    </HBox>
+
+    <HBox spacing="10"
+          alignment="CENTER_RIGHT">
+
+        <Button text="Update Item"
+                prefHeight="40"
+                onAction="#onUpdate"/>
+
+    </HBox>
+
+</VBox>

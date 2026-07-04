@@ -2,44 +2,35 @@ package com.dt.style;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 
-/**
- * Created by pedro_000 on 12/15/13.
- */
-public class MetroPasswordFieldSkin extends TextFieldWithButtonSkin {
-    private boolean shouldMaskText = true;
+public class MetroPasswordFieldSkin extends StackPane {
 
-    public MetroPasswordFieldSkin(TextField textField) {
-        super(textField);
+    private final PasswordField passwordField = new PasswordField();
+    private final TextField textField = new TextField();
+    private boolean showing = false;
+
+    public MetroPasswordFieldSkin() {
+        textField.setManaged(false);
+        textField.setVisible(false);
+
+        getChildren().addAll(passwordField, textField);
+
+        // sync text both ways
+        textField.textProperty().bindBidirectional(passwordField.textProperty());
     }
 
-    @Override
-    protected void rightButtonPressed() {
-        TextField textField = getSkinnable();
-        shouldMaskText = false;
-        textField.setText(textField.getText());
-        shouldMaskText = true;
+    public void toggleVisibility() {
+        showing = !showing;
+
+        textField.setVisible(showing);
+        textField.setManaged(showing);
+
+        passwordField.setVisible(!showing);
+        passwordField.setManaged(!showing);
     }
 
-    @Override
-    protected void rightButtonReleased() {
-        TextField textField = getSkinnable();
-        textField.setText(textField.getText());
-        textField.end();
-    }
-
-    @Override
-    protected String maskText(String txt) {
-        if (getSkinnable() instanceof PasswordField && shouldMaskText) {
-            int n = txt.length();
-            StringBuilder passwordBuilder = new StringBuilder(n);
-            for (int i = 0; i < n; i++) {
-                passwordBuilder.append(BULLET);
-            }
-
-            return passwordBuilder.toString();
-        } else {
-            return txt;
-        }
+    public String getText() {
+        return passwordField.getText();
     }
 }

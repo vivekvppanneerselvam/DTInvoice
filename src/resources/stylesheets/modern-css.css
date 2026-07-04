@@ -1,0 +1,93 @@
+.root {
+    -fx-font-family: "Segoe UI";
+}
+
+.filter-btn {
+    -fx-background-color: white;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20 10 20;
+}
+
+.filter-btn:selected {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+}
+
+.kpi-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #e5e7eb;
+    -fx-padding: 22;
+}
+
+.kpi-title {
+    -fx-text-fill: #6b7280;
+    -fx-font-size: 14px;
+}
+
+.kpi-value-blue {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2563eb;
+}
+
+.kpi-value-green {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #16a34a;
+}
+
+.kpi-value-red {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #dc2626;
+}
+
+.kpi-value-orange {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ea580c;
+}
+
+.kpi-value-dark {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #e5e7eb;
+    -fx-padding: 22;
+}
+
+.section-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+}
+
+.table-view {
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-background-color: white;
+}
+
+.table-row-cell {
+    -fx-cell-size: 42px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #111827;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

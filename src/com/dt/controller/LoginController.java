@@ -105,7 +105,9 @@ public class LoginController implements Initializable {
         try {
             Stage st = new Stage();
             stage = (Stage) lblClose.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("/com/dt/view/ForgotPassword.fxml"));
+            URL resourceUrl = getClass().getResource("/com/dt/view/ForgotPassword.fxml");
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            Parent root = loader.load();
             Scene scene = new Scene(root);
             st.setResizable(false);
             st.setMaximized(false);

@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 80mm Thermal Printer Professional Invoice Design - Image 2 Style -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProfessionalInvoiceReport" pageWidth="227" pageHeight="1000" whenNoDataType="BlankPage" columnWidth="207" leftMargin="10" rightMargin="10" topMargin="8" bottomMargin="10" isFloatColumnFooter="true" isIgnorePagination="true" uuid="7d955f18-8e54-4bc2-b6ee-ee0c95d5874e">
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<!-- Parameters -->
+	<parameter name="invoiceNumber" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="invoiceDate" class="java.time.LocalDate" isForPrompting="false"/>
+	<parameter name="invoiceTime" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="customerName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="customerPhone" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="customerAddress" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="firmName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="firmAddress" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="firmPhoneNumbers" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="firmLogo" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="gstPercent" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="gstAmount" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="discount" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="deliveryCharge" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="paid" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="balance" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="billAmount" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bankDetails" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="fssaiNumber" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="qrCodeImage" class="java.io.InputStream" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="itemName" class="java.lang.String">
+		<fieldDescription><![CDATA[itemName]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Double">
+		<fieldDescription><![CDATA[qty]]></fieldDescription>
+	</field>
+	<field name="gst" class="java.lang.Double">
+		<fieldDescription><![CDATA[gst]]></fieldDescription>
+	</field>
+	<field name="rate" class="java.lang.Double">
+		<fieldDescription><![CDATA[rate]]></fieldDescription>
+	</field>
+	<variable name="amount" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{qty} * $F{rate}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<variable name="amountTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{amount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<variable name="quantityTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{qty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<!-- HEADER SECTION WITH COMPANY INFO -->
+			<rectangle>
+				<reportElement x="0" y="0" width="206" height="65" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<!-- Logo -->
+			<image hAlign="Center" vAlign="Top">
+				<reportElement x="4" y="3" width="25" height="25" isRemoveLineWhenBlank="true" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<imageExpression><![CDATA[$P{firmLogo}]]></imageExpression>
+			</image>
+			<!-- Company Name - Centered Bold -->
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="32" y="2" width="170" height="12" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{firmName} != null ? $P{firmName}.trim().toUpperCase() : ""]]></textFieldExpression>
+			</textField>
+			<!-- Address Line -->
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="32" y="14" width="170" height="9" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{firmAddress} != null ? $P{firmAddress}.trim() : ""]]></textFieldExpression>
+			</textField>
+			<!-- Phone Numbers -->
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="32" y="23" width="170" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{firmPhoneNumbers} == null || $P{firmPhoneNumbers}.isEmpty()) ? "" : $P{firmPhoneNumbers}.trim()]]></textFieldExpression>
+			</textField>
+			<!-- Separator Line -->
+			<line>
+				<reportElement x="2" y="33" width="202" height="1" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<!-- GST & FSSAI INFO BOX -->
+			<rectangle>
+				<reportElement x="2" y="35" width="154" height="16" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="4" y="36" width="35" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["GST No"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="42" y="36" width="110" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($P{bankDetails} != null && !$P{bankDetails}.isEmpty()) ? $P{bankDetails} : "33ABCDE1234F125")]]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="44" width="35" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FSSAI No"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="42" y="44" width="110" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($P{fssaiNumber} != null && !$P{fssaiNumber}.isEmpty()) ? $P{fssaiNumber} : "12415023001234")]]]></textFieldExpression>
+			</textField>
+			<!-- CASH INVOICE BOX (Black) -->
+			<rectangle>
+				<reportElement x="158" y="35" width="46" height="16" backcolor="#000000" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="158" y="35" width="46" height="16" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier" size="8" isBold="true" forecolor="#FFFFFF"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CASH\nINVOICE"]]></textFieldExpression>
+			</textField>
+			<!-- Separator Line -->
+			<line>
+				<reportElement x="2" y="52" width="202" height="1" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<!-- CUSTOMER DETAILS & INVOICE INFO SECTION -->
+			<rectangle>
+				<reportElement x="0" y="54" width="206" height="48" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<!-- LEFT SIDE: CUSTOMER DETAILS -->
+			<rectangle>
+				<reportElement x="2" y="56" width="95" height="8" backcolor="#000000" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="2" y="56" width="95" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true" forecolor="#FFFFFF"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CUSTOMER DETAILS"]]></textFieldExpression>
+			</textField>
+			<!-- Customer Name -->
+			<textField>
+				<reportElement x="4" y="65" width="91" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Name : " + ($P{customerName} == null ? "Cash Sale" : $P{customerName})]]></textFieldExpression>
+			</textField>
+			<!-- Customer Contact -->
+			<textField>
+				<reportElement x="4" y="73" width="91" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Contact : " + (($P{customerPhone} != null && !$P{customerPhone}.isEmpty()) ? $P{customerPhone} : "")]]]></textFieldExpression>
+			</textField>
+			<!-- Customer Address -->
+			<textField textAdjust="StretchHeight">
+				<reportElement x="4" y="81" width="91" height="18" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Address : " + (($P{customerAddress} != null && !$P{customerAddress}.isEmpty()) ? $P{customerAddress} : "")]]]></textFieldExpression>
+			</textField>
+			<!-- VERTICAL SEPARATOR -->
+			<line>
+				<reportElement x="100" y="54" width="1" height="48" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<!-- RIGHT SIDE: INVOICE INFO -->
+			<!-- Invoice Number -->
+			<textField>
+				<reportElement x="103" y="65" width="100" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Invoice # : INV-" + $P{invoiceNumber}]]></textFieldExpression>
+			</textField>
+			<!-- Invoice Date -->
+			<textField>
+				<reportElement x="103" y="73" width="100" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date : " + $P{invoiceDate}.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"))]]></textFieldExpression>
+			</textField>
+			<!-- Invoice Time -->
+			<textField>
+				<reportElement x="103" y="81" width="100" height="7" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Time : " + ($P{invoiceTime} != null ? $P{invoiceTime} : "08:07 AM")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="206" height="13" backcolor="#E8E8E8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<!-- # Column Header -->
+			<textField>
+				<reportElement x="2" y="1" width="12" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["#"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="15" y="0" width="1" height="13" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<!-- ITEM Column Header -->
+			<textField>
+				<reportElement x="17" y="1" width="95" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ITEM"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="113" y="0" width="1" height="13" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<!-- QTY Column Header -->
+			<textField>
+				<reportElement x="115" y="1" width="32" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["QTY"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="148" y="0" width="1" height="13" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<!-- GST% Column Header -->
+			<textField>
+				<reportElement x="150" y="1" width="25" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["GST%"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="176" y="0" width="1" height="13" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<!-- TOTAL Column Header -->
+			<textField>
+				<reportElement x="178" y="1" width="26" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="206" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<!-- Column Separators -->
+			<line>
+				<reportElement x="15" y="0" width="1" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="113" y="0" width="1" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="148" y="0" width="1" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="176" y="0" width="1" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<!-- Row Number -->
+			<textField>
+				<reportElement x="2" y="1" width="12" height="9" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<!-- Item Name -->
+			<textField textAdjust="StretchHeight">
+				<reportElement x="17" y="1" width="95" height="9" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemName}]]></textFieldExpression>
+			</textField>
+			<!-- Quantity -->
+			<textField>
+				<reportElement x="115" y="1" width="32" height="9" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<!-- GST% -->
+			<textField>
+				<reportElement x="150" y="1" width="25" height="9" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gst}]]></textFieldExpression>
+			</textField>
+			<!-- Total Amount -->
+			<textField>
+				<reportElement x="178" y="1" width="26" height="9" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.dt.utils.IndianCurrencyFormatting.applyFormatting(java.math.BigDecimal.valueOf($V{amount}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="240" splitType="Stretch">
+			<!-- ITEMS SUMMARY LINE -->
+			<rectangle>
+				<reportElement x="0" y="0" width="206" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="2" y="1" width="100" height="9" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL ITEMS : " + $V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="105" y="0" width="1" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="107" y="1" width="97" height="9" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL QTY : " + $V{quantityTotal}]]></textFieldExpression>
+			</textField>
+			<!-- FINANCIAL SUMMARY SECTION -->
+			<rectangle>
+				<reportElement x="0" y="12" width="206" height="100" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<!-- Sub Total Row -->
+			<textField>
+				<reportElement x="2" y="14" width="102" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sub Total"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="14" width="97" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["₹ " + com.dt.utils.IndianCurrencyFormatting.applyFormatting(java.math.BigDecimal.valueOf($V{amountTotal}))]]></textFieldExpression>
+			</textField>
+			<!-- GST Amount Row -->
+			<textField>
+				<reportElement x="2" y="23" width="102" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["GST Amount"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="23" width="97" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["₹ " + com.dt.utils.IndianCurrencyFormatting.applyFormatting(($P{gstAmount} != null ? $P{gstAmount} : BigDecimal.ZERO))]]></textFieldExpression>
+			</textField>
+			<!-- Bill Amount Row -->
+			<textField>
+				<reportElement x="2" y="32" width="102" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bill Amount"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="32" width="97" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["₹ " + com.dt.utils.IndianCurrencyFormatting.applyFormatting(($P{billAmount} != null ? $P{billAmount} : java.math.BigDecimal.valueOf($V{amountTotal})))]]></textFieldExpression>
+			</textField>
+			<!-- Discount Row (Conditional) -->
+			<textField isBlankWhenNull="true">
+				<reportElement x="2" y="41" width="102" height="8" isRemoveLineWhenBlank="true" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851">
+					<printWhenExpression><![CDATA[$P{discount} != null && $P{discount}.signum() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Discount"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="107" y="41" width="97" height="8" isRemoveLineWhenBlank="true" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851">
+					<printWhenExpression><![CDATA[$P{discount} != null && $P{discount}.signum() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["₹ " + com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{discount})]]></textFieldExpression>
+			</textField>
+			<!-- Delivery Row (Conditional) -->
+			<textField isBlankWhenNull="true">
+				<reportElement x="2" y="50" width="102" height="8" isRemoveLineWhenBlank="true" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851">
+					<printWhenExpression><![CDATA[$P{deliveryCharge} != null && $P{deliveryCharge}.signum() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Delivery Charge"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="107" y="50" width="97" height="8" isRemoveLineWhenBlank="true" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851">
+					<printWhenExpression><![CDATA[$P{deliveryCharge} != null && $P{deliveryCharge}.signum() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["₹ " + com.dt.utils.IndianCurrencyFormatting.applyFormatting(($P{deliveryCharge} != null ? $P{deliveryCharge} : BigDecimal.ZERO))]]></textFieldExpression>
+			</textField>
+			<!-- NET PAYABLE - HIGHLIGHTED BLACK BOX -->
+			<rectangle>
+				<reportElement x="0" y="59" width="206" height="13" backcolor="#000000" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="2" y="60" width="102" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="8" isBold="true" forecolor="#FFFFFF"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NET PAYABLE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="60" width="97" height="11" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="8" isBold="true" forecolor="#FFFFFF"/>
+				</textElement>
+				<textFieldExpression><![CDATA["₹ " + com.dt.utils.IndianCurrencyFormatting.applyFormatting(java.math.BigDecimal.valueOf($V{amountTotal}))]]></textFieldExpression>
+			</textField>
+			<!-- Paid Amount Row -->
+			<textField>
+				<reportElement x="2" y="74" width="102" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Paid Amount"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="74" width="97" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["₹ " + com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{paid})]]></textFieldExpression>
+			</textField>
+			<!-- Pending Amount Row -->
+			<textField>
+				<reportElement x="2" y="83" width="102" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pending Amount"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="83" width="97" height="8" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["₹ " + com.dt.utils.IndianCurrencyFormatting.applyFormatting($P{balance})]]></textFieldExpression>
+			</textField>
+			<!-- QR CODE SECTION -->
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="8" y="115" width="50" height="50" isRemoveLineWhenBlank="true" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<imageExpression><![CDATA[$P{qrCodeImage}]]></imageExpression>
+			</image>
+			<!-- THANK YOU MESSAGE -->
+			<textField>
+				<reportElement x="8" y="167" width="50" height="10" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Thank You\nVisit Again !"]]></textFieldExpression>
+			</textField>
+			<!-- TERMS & CONDITIONS BOX -->
+			<rectangle>
+				<reportElement x="62" y="115" width="142" height="70" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<!-- Terms Title - Black Background -->
+			<rectangle>
+				<reportElement x="62" y="115" width="142" height="10" backcolor="#000000" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="62" y="115" width="142" height="10" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier" size="6" isBold="true" forecolor="#FFFFFF"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TERMS & CONDITIONS"]]></textFieldExpression>
+			</textField>
+			<!-- Terms Content -->
+			<textField textAdjust="StretchHeight">
+				<reportElement x="65" y="127" width="136" height="55" uuid="290f1ee6-6c54-4b01-90e6-d701748f0851"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Courier" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1. Goods once sold not be taken after a week.\n2. Refund or exchange policy only permits allows within a week with valid invoice bill.\n\n*** THANK YOU ***"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
+
+

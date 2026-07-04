@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dt.sales.SalesDashboardController"
+            prefWidth="1600"
+            prefHeight="950"
+            style="-fx-background-color:#f5f7fa;">
+
+    <!-- ================================================= -->
+    <!-- TOP SECTION -->
+    <!-- ================================================= -->
+
+    <top>
+
+        <VBox spacing="12"
+              style="-fx-background-color:white;
+                     -fx-padding:15;
+                     -fx-border-color:#dfe3e8;
+                     -fx-border-width:0 0 1 0;">
+
+            <!-- TITLE -->
+
+            <HBox alignment="CENTER_LEFT">
+
+                <VBox spacing="3">
+
+                    <Label text="Sales Analytics Dashboard"
+                           style="-fx-font-size:24;
+                                  -fx-font-weight:bold;"/>
+
+                    <Label text="Business Intelligence • Sales • Profit • GST • Collection"
+                           style="-fx-text-fill:#6b7280;"/>
+
+                </VBox>
+
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <Label fx:id="lblLastRefresh"
+                       text="-"
+                       style="-fx-text-fill:#6b7280;"/>
+
+            </HBox>
+
+            <!-- FILTER BAR -->
+
+            <HBox spacing="8"
+                  alignment="CENTER_LEFT">
+
+                <ToggleButton fx:id="btnToday"
+                              text="Today"
+                              onAction="#onToday"/>
+
+<!--                <ToggleButton fx:id="btnYesterday"-->
+<!--                              text="Yesterday"-->
+<!--                              onAction="#onYesterday"/>-->
+
+                <ToggleButton fx:id="btnWeek"
+                              text="Week"
+                              onAction="#onWeek"/>
+
+                <ToggleButton fx:id="btn30Days"
+                              text="30 Days"
+                              onAction="#onLast30Days"/>
+
+                <ToggleButton fx:id="btnMonth"
+                              text="Month"
+                              onAction="#onMonth"/>
+
+                <ToggleButton fx:id="btnYear"
+                              text="Year"
+                              onAction="#onYear"/>
+
+<!--                <ToggleButton fx:id="btnFY"-->
+<!--                              text="FY"-->
+<!--                              onAction="#onFY"/>-->
+
+                <ToggleButton fx:id="btnCustom"
+                              text="Custom"
+                              onAction="#onFilter"/>
+
+                <Separator orientation="VERTICAL"/>
+
+                <Label text="From"/>
+
+                <DatePicker fx:id="dpFrom"
+                            prefWidth="140"/>
+
+                <Label text="To"/>
+
+                <DatePicker fx:id="dpTo"
+                            prefWidth="140"/>
+
+                <Button text="Apply"
+                        onAction="#onFilter"/>
+
+                <Button text="Refresh"
+                        onAction="#onRefresh"/>
+
+                <Button text="Export"
+                        onAction="#onExport"/>
+
+            </HBox>
+
+            <!-- SUMMARY RIBBON -->
+
+            <HBox spacing="2">
+
+                <VBox HBox.hgrow="ALWAYS"
+                      alignment="CENTER"
+                      prefHeight="85"
+                      style="-fx-background-color:#0f172a;">
+
+                    <Label text="SALES"
+                           style="-fx-text-fill:#cbd5e1;"/>
+
+                    <Label fx:id="lblSales"
+                           text="₹0.00"
+                           style="-fx-text-fill:white;
+                                  -fx-font-size:22;
+                                  -fx-font-weight:bold;"/>
+
+                    <Label fx:id="lblSalesGrowth"
+                           text="-"
+                           style="-fx-text-fill:#22c55e;"/>
+
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS"
+                      alignment="CENTER"
+                      style="-fx-background-color:#0f172a;">
+
+                    <Label text="GROSS PROFIT"
+                           style="-fx-text-fill:#cbd5e1;"/>
+
+                    <Label fx:id="lblGrossProfit"
+                           text="₹0.00"
+                           style="-fx-text-fill:#22c55e;
+                                  -fx-font-size:22;
+                                  -fx-font-weight:bold;"/>
+
+                    <Label fx:id="lblProfitGrowth"
+                           text="-"
+                           style="-fx-text-fill:#22c55e;"/>
+
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS"
+                      alignment="CENTER"
+                      style="-fx-background-color:#0f172a;">
+
+                    <Label text="NET PROFIT"
+                           style="-fx-text-fill:#cbd5e1;"/>
+
+                    <Label fx:id="lblNetProfit"
+                           text="₹0.00"
+                           style="-fx-text-fill:#4ade80;
+                                  -fx-font-size:22;
+                                  -fx-font-weight:bold;"/>
+
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS"
+                      alignment="CENTER"
+                      style="-fx-background-color:#0f172a;">
+
+                    <Label text="BILLS"
+                           style="-fx-text-fill:#cbd5e1;"/>
+
+                    <Label fx:id="lblBills"
+                           text="0"
+                           style="-fx-text-fill:white;
+                                  -fx-font-size:22;
+                                  -fx-font-weight:bold;"/>
+
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS"
+                      alignment="CENTER"
+                      style="-fx-background-color:#0f172a;">
+
+                    <Label text="OUTSTANDING"
+                           style="-fx-text-fill:#cbd5e1;"/>
+
+                    <Label fx:id="lblOutstanding"
+                           text="₹0.00"
+                           style="-fx-text-fill:#ef4444;
+                                  -fx-font-size:22;
+                                  -fx-font-weight:bold;"/>
+
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS"
+                      alignment="CENTER"
+                      style="-fx-background-color:#0f172a;">
+
+                    <Label text="EXPENSES"
+                           style="-fx-text-fill:#cbd5e1;"/>
+
+                    <Label fx:id="lblExpenses"
+                           text="₹0.00"
+                           style="-fx-text-fill:#f59e0b;
+                                  -fx-font-size:22;
+                                  -fx-font-weight:bold;"/>
+
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+
+    </top>
+
+    <!-- ================================================= -->
+    <!-- CENTER -->
+    <!-- ================================================= -->
+
+    <center>
+
+        <VBox spacing="12"
+              style="-fx-padding:12;">
+
+            <!-- ============================================= -->
+            <!-- SALES TREND + HEALTH -->
+            <!-- ============================================= -->
+
+            <SplitPane dividerPositions="0.72">
+
+                <!-- SALES TREND -->
+
+                <VBox spacing="10"
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-background-radius:8;">
+
+                    <HBox alignment="CENTER_LEFT">
+
+                        <Label text="Sales Performance Trend"
+                               style="-fx-font-size:18;
+                                      -fx-font-weight:bold;"/>
+
+                        <Pane HBox.hgrow="ALWAYS"/>
+
+                        <Label text="Sales vs Profit vs Purchase Cost"
+                               style="-fx-text-fill:#6b7280;"/>
+
+                    </HBox>
+
+                    <LineChart fx:id="salesTrendChart"
+                               animated="false"
+                               VBox.vgrow="ALWAYS"
+                               prefHeight="320">
+
+                        <xAxis>
+                            <CategoryAxis label="Date"/>
+                        </xAxis>
+
+                        <yAxis>
+                            <NumberAxis label="Amount"/>
+                        </yAxis>
+
+                    </LineChart>
+
+                </VBox>
+
+                <!-- BUSINESS HEALTH -->
+
+                <VBox spacing="12"
+                      prefWidth="320"
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-background-radius:8;">
+
+                    <Label text="Business Health"
+                           style="-fx-font-size:18;
+                                  -fx-font-weight:bold;"/>
+
+                    <HBox alignment="CENTER">
+
+                        <ProgressIndicator
+                                fx:id="businessHealthIndicator"
+                                prefWidth="140"
+                                prefHeight="140"/>
+
+                    </HBox>
+
+                    <Label fx:id="lblHealthScore"
+                           text="0 / 100"
+                           alignment="CENTER"
+                           maxWidth="Infinity"
+                           style="-fx-font-size:22;
+                                  -fx-font-weight:bold;"/>
+
+                    <Label fx:id="lblHealthStatus"
+                           text="Average"
+                           alignment="CENTER"
+                           maxWidth="Infinity"
+                           style="-fx-font-size:16;
+                                  -fx-font-weight:bold;"/>
+
+                    <Separator/>
+
+                    <Label text="Payment Analysis"
+                           style="-fx-font-weight:bold;"/>
+
+                    <GridPane hgap="10"
+                              vgap="10">
+
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="65"/>
+                            <ColumnConstraints percentWidth="35"/>
+                        </columnConstraints>
+
+                        <Label text="UPI"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="0"/>
+
+                        <Label fx:id="lblUPIAmount"
+                               text="₹0.00"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="1"/>
+
+                        <Label text="Cash"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="0"/>
+
+                        <Label fx:id="lblCashAmount"
+                               text="₹0.00"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="1"/>
+
+                        <Label text="Card"
+                               GridPane.rowIndex="2"
+                               GridPane.columnIndex="0"/>
+
+                        <Label fx:id="lblCardAmount"
+                               text="₹0.00"
+                               GridPane.rowIndex="2"
+                               GridPane.columnIndex="1"/>
+
+                        <Label text="Credit"
+                               GridPane.rowIndex="3"
+                               GridPane.columnIndex="0"/>
+
+                        <Label fx:id="lblCreditAmount"
+                               text="₹0.00"
+                               GridPane.rowIndex="3"
+                               GridPane.columnIndex="1"/>
+
+                    </GridPane>
+
+                    <Separator/>
+
+                    <Label text="Top Payment Mode"
+                           style="-fx-font-weight:bold;"/>
+
+                    <Label fx:id="lblTopPaymentMode"
+                           text="-"
+                           style="-fx-font-size:18;
+                                  -fx-font-weight:bold;"/>
+
+                    <Label fx:id="lblTopPaymentPercent"
+                           text="0%"
+                           style="-fx-text-fill:#16a34a;
+                                  -fx-font-size:16;"/>
+
+                </VBox>
+
+            </SplitPane>
+
+            <!-- ============================================= -->
+            <!-- CHART ANALYTICS -->
+            <!-- ============================================= -->
+
+            <HBox spacing="12">
+
+                <!-- PAYMENT CHART -->
+
+                <VBox HBox.hgrow="ALWAYS"
+                      spacing="8"
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-background-radius:8;">
+
+                    <Label text="Payment Analysis"
+                           style="-fx-font-size:16;
+                                  -fx-font-weight:bold;"/>
+
+                    <PieChart fx:id="paymentChart"
+                              prefHeight="260"/>
+
+                </VBox>
+
+                <!-- GST CHART -->
+
+                <VBox HBox.hgrow="ALWAYS"
+                      spacing="8"
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-background-radius:8;">
+
+                    <Label text="GST Analysis"
+                           style="-fx-font-size:16;
+                                  -fx-font-weight:bold;"/>
+
+                    <PieChart fx:id="gstChart"
+                              prefHeight="260"/>
+
+                    <GridPane hgap="10"
+                              vgap="6">
+
+                        <Label text="GST Bills"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="0"/>
+
+                        <Label fx:id="lblGSTBills"
+                               text="0"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="1"/>
+
+                        <Label text="Non GST"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="0"/>
+
+                        <Label fx:id="lblNonGSTBills"
+                               text="0"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="1"/>
+
+                        <Label text="GST Sales"
+                               GridPane.rowIndex="2"
+                               GridPane.columnIndex="0"/>
+
+                        <Label fx:id="lblGSTSales"
+                               text="₹0.00"
+                               GridPane.rowIndex="2"
+                               GridPane.columnIndex="1"/>
+
+                        <Label text="GST Collected"
+                               GridPane.rowIndex="3"
+                               GridPane.columnIndex="0"/>
+
+                        <Label fx:id="lblGSTCollected"
+                               text="₹0.00"
+                               GridPane.rowIndex="3"
+                               GridPane.columnIndex="1"/>
+
+                    </GridPane>
+
+                </VBox>
+
+                <!-- CATEGORY CHART -->
+
+                <VBox HBox.hgrow="ALWAYS"
+                      spacing="8"
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-background-radius:8;">
+
+                    <Label text="Category Analysis"
+                           style="-fx-font-size:16;
+                                  -fx-font-weight:bold;"/>
+
+                    <PieChart fx:id="categoryChart"
+                              prefHeight="260"/>
+
+                </VBox>
+
+            </HBox>
+
+            <!-- ============================================= -->
+            <!-- TOP CUSTOMERS + TOP PURCHASERS -->
+            <!-- ============================================= -->
+
+            <HBox spacing="12">
+
+                <!-- TOP CUSTOMERS -->
+
+                <VBox HBox.hgrow="ALWAYS"
+                      spacing="8"
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-background-radius:8;">
+
+                    <Label text="Top Customers"
+                           style="-fx-font-size:18;
+                                  -fx-font-weight:bold;"/>
+
+                    <TableView fx:id="topCustomersTable"
+                               prefHeight="250">
+
+                        <columns>
+
+                            <TableColumn fx:id="colCustomerRank"
+                                         text="#"
+                                         prefWidth="60"/>
+
+                            <TableColumn fx:id="colCustomerName"
+                                         text="Customer"
+                                         prefWidth="220"/>
+
+                            <TableColumn fx:id="colCustomerBills"
+                                         text="Bills"
+                                         prefWidth="100"/>
+
+                            <TableColumn fx:id="colCustomerSales"
+                                         text="Sales"
+                                         prefWidth="150"/>
+
+                        </columns>
+
+                    </TableView>
+
+                </VBox>
+
+                <!-- TOP PURCHASERS -->
+
+                <VBox HBox.hgrow="ALWAYS"
+                      spacing="8"
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-background-radius:8;">
+
+                    <Label text="Top Purchasers"
+                           style="-fx-font-size:18;
+                                  -fx-font-weight:bold;"/>
+
+                    <TableView fx:id="topPurchasersTable"
+                               prefHeight="250">
+
+                        <columns>
+
+                            <TableColumn fx:id="colPurchaserRank"
+                                         text="#"
+                                         prefWidth="60"/>
+
+                            <TableColumn fx:id="colPurchaserName"
+                                         text="Purchaser"
+                                         prefWidth="220"/>
+
+                            <TableColumn fx:id="colPurchaseBills"
+                                         text="Bills"
+                                         prefWidth="100"/>
+
+                            <TableColumn fx:id="colPurchaseValue"
+                                         text="Purchase Value"
+                                         prefWidth="160"/>
+
+                        </columns>
+
+                    </TableView>
+
+                </VBox>
+
+            </HBox>
+
+            <!-- ============================================= -->
+            <!-- BUSINESS INSIGHTS -->
+            <!-- ============================================= -->
+
+            <VBox spacing="8"
+                  style="-fx-background-color:white;
+                         -fx-padding:15;
+                         -fx-background-radius:8;">
+
+                <Label text="Business Insights"
+                       style="-fx-font-size:18;
+                              -fx-font-weight:bold;"/>
+
+                <ListView fx:id="insightsList"
+                          prefHeight="180"/>
+
+            </VBox>
+
+            <!-- ============================================= -->
+            <!-- RECENT SALES -->
+            <!-- ============================================= -->
+
+            <VBox spacing="8"
+                  VBox.vgrow="ALWAYS"
+                  style="-fx-background-color:white;
+                         -fx-padding:15;
+                         -fx-background-radius:8;">
+
+                <HBox alignment="CENTER_LEFT">
+
+                    <Label text="Recent Sales Transactions"
+                           style="-fx-font-size:18;
+                                  -fx-font-weight:bold;"/>
+
+                    <Pane HBox.hgrow="ALWAYS"/>
+
+                    <Label text="Outstanding Bills Highlighted"
+                           style="-fx-text-fill:#dc2626;"/>
+
+                </HBox>
+
+                <TableView fx:id="salesTable"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn fx:id="colInvoice"
+                                     text="Invoice No"
+                                     prefWidth="130"/>
+
+                        <TableColumn fx:id="colCustomer"
+                                     text="Customer"
+                                     prefWidth="220"/>
+
+                        <TableColumn fx:id="colSaleType"
+                                     text="Sale Type"
+                                     prefWidth="120"/>
+
+                        <TableColumn fx:id="colPayment"
+                                     text="Payment"
+                                     prefWidth="120"/>
+
+                        <TableColumn fx:id="colSales"
+                                     text="Sales"
+                                     prefWidth="130"/>
+
+                        <TableColumn fx:id="colProfit"
+                                     text="Profit"
+                                     prefWidth="130"/>
+
+                        <TableColumn fx:id="colGST"
+                                     text="GST"
+                                     prefWidth="120"/>
+
+                        <TableColumn fx:id="colBalance"
+                                     text="Balance"
+                                     prefWidth="130"/>
+
+                        <TableColumn fx:id="colDate"
+                                     text="Date"
+                                     prefWidth="130"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+        </VBox>
+
+    </center>
+
+    <!-- ================================================= -->
+    <!-- FOOTER -->
+    <!-- ================================================= -->
+
+    <bottom>
+
+        <HBox spacing="25"
+              alignment="CENTER_LEFT"
+              prefHeight="55"
+              style="-fx-background-color:#0f172a;
+                     -fx-padding:0 15 0 15;">
+
+            <Label text="Sales"
+                   style="-fx-text-fill:#cbd5e1;"/>
+
+            <Label fx:id="lblFooterSales"
+                   text="₹0.00"
+                   style="-fx-text-fill:white;
+                          -fx-font-weight:bold;"/>
+
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Profit"
+                   style="-fx-text-fill:#cbd5e1;"/>
+
+            <Label fx:id="lblFooterProfit"
+                   text="₹0.00"
+                   style="-fx-text-fill:#22c55e;
+                          -fx-font-weight:bold;"/>
+
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Expense"
+                   style="-fx-text-fill:#cbd5e1;"/>
+
+            <Label fx:id="lblFooterExpense"
+                   text="₹0.00"
+                   style="-fx-text-fill:#f59e0b;
+                          -fx-font-weight:bold;"/>
+
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="GST"
+                   style="-fx-text-fill:#cbd5e1;"/>
+
+            <Label fx:id="lblFooterGST"
+                   text="₹0.00"
+                   style="-fx-text-fill:#38bdf8;
+                          -fx-font-weight:bold;"/>
+
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Outstanding"
+                   style="-fx-text-fill:#cbd5e1;"/>
+
+            <Label fx:id="lblFooterOutstanding"
+                   text="₹0.00"
+                   style="-fx-text-fill:#ef4444;
+                          -fx-font-weight:bold;"/>
+
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Avg Bill"
+                   style="-fx-text-fill:#cbd5e1;"/>
+
+            <Label fx:id="lblFooterAvgBill"
+                   text="₹0.00"
+                   style="-fx-text-fill:white;
+                          -fx-font-weight:bold;"/>
+
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Recovery"
+                   style="-fx-text-fill:#cbd5e1;"/>
+
+            <Label fx:id="lblFooterRecovery"
+                   text="0%"
+                   style="-fx-text-fill:#22c55e;
+                          -fx-font-weight:bold;"/>
+
+            <Pane HBox.hgrow="ALWAYS"/>
+
+            <Label text="Analytics Dashboard"
+                   style="-fx-text-fill:#94a3b8;"/>
+
+        </HBox>
+
+    </bottom>
+
+</BorderPane>

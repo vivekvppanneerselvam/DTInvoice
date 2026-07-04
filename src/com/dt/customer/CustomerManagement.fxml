@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dt.customer.CustomerManagementController"
+
+            prefWidth="1850"
+            prefHeight="980"
+
+            style="-fx-background-color: #f3f4f6;">
+
+    <!-- ================================================= -->
+    <!-- MAIN -->
+    <!-- ================================================= -->
+
+    <center>
+
+        <HBox spacing="0">
+
+            <!-- ========================================= -->
+            <!-- LEFT FORM PANEL -->
+            <!-- ========================================= -->
+
+            <VBox prefWidth="390"
+                  minWidth="360"
+                  maxWidth="420"
+
+                  spacing="10"
+
+                  style="-fx-background-color: white;
+                         -fx-padding: 12;
+                         -fx-border-color: #d1d5db;
+                         -fx-border-width: 0 1 0 0;">
+
+                <!-- TITLE -->
+
+                <Label text="Customer Details"
+
+                       style="-fx-font-size: 22px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #111827;"/>
+
+                <!-- TYPE -->
+
+                <VBox spacing="4">
+
+                    <Label text="Customer Type"
+
+                           style="-fx-font-size: 11px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #374151;"/>
+
+                    <HBox spacing="0">
+
+                        <ToggleButton fx:id="btnCash"
+                                      text="Cash"
+
+                                      prefHeight="38"
+
+                                      HBox.hgrow="ALWAYS"
+                                      maxWidth="Infinity"
+
+                                      style="-fx-background-radius: 0;
+                                             -fx-border-radius: 0;"/>
+
+                        <ToggleButton fx:id="btnCredit"
+                                      text="Credit"
+
+                                      prefHeight="38"
+
+                                      HBox.hgrow="ALWAYS"
+                                      maxWidth="Infinity"
+
+                                      style="-fx-background-radius: 0;
+                                             -fx-border-radius: 0;"/>
+
+                        <ToggleButton fx:id="btnGST"
+                                      text="GST"
+
+                                      prefHeight="38"
+
+                                      HBox.hgrow="ALWAYS"
+                                      maxWidth="Infinity"
+
+                                      style="-fx-background-radius: 0;
+                                             -fx-border-radius: 0;"/>
+
+                    </HBox>
+
+                </VBox>
+
+                <!-- CUSTOMER CODE -->
+
+                <VBox spacing="4">
+
+                    <Label text="Customer Code"
+
+                           style="-fx-font-size: 11px;
+                                  -fx-font-weight: bold;"/>
+
+                    <TextField fx:id="tfCustomerCode"
+
+                               editable="false"
+
+                               prefHeight="34"
+
+                               style="-fx-background-radius: 0;
+                                      -fx-border-radius: 0;
+                                      -fx-background-color: #f9fafb;"/>
+
+                </VBox>
+
+                <!-- CUSTOMER NAME -->
+
+                <VBox spacing="4">
+
+                    <Label text="Customer Name"
+
+                           style="-fx-font-size: 11px;
+                                  -fx-font-weight: bold;"/>
+
+                    <TextField fx:id="tfCustomerName"
+
+                               prefHeight="34"
+
+                               style="-fx-background-radius: 0;
+                                      -fx-border-radius: 0;"/>
+
+                </VBox>
+
+                <!-- PHONE -->
+
+                <HBox spacing="10">
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="Phone Number"
+
+                               style="-fx-font-size: 11px;
+                                      -fx-font-weight: bold;"/>
+
+                        <TextField fx:id="tfPhone"
+
+                                   prefHeight="34"
+
+                                   style="-fx-background-radius: 0;
+                                          -fx-border-radius: 0;"/>
+
+                    </VBox>
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="Alt Phone"
+
+                               style="-fx-font-size: 11px;
+                                      -fx-font-weight: bold;"/>
+
+                        <TextField fx:id="tfAltPhone"
+
+                                   prefHeight="34"
+
+                                   style="-fx-background-radius: 0;
+                                          -fx-border-radius: 0;"/>
+
+                    </VBox>
+
+                </HBox>
+
+                <!-- GST -->
+
+                <VBox spacing="4">
+
+                    <Label text="GST Number"
+
+                           style="-fx-font-size: 11px;
+                                  -fx-font-weight: bold;"/>
+
+                    <TextField fx:id="tfGSTNumber"
+
+                               prefHeight="34"
+
+                               style="-fx-background-radius: 0;
+                                      -fx-border-radius: 0;"/>
+
+                </VBox>
+
+                <!-- ADDRESS -->
+
+                <VBox spacing="4">
+
+                    <Label text="Address"
+
+                           style="-fx-font-size: 11px;
+                                  -fx-font-weight: bold;"/>
+
+                    <TextArea fx:id="tfAddress1"
+
+                              prefHeight="90"
+
+                              wrapText="true"
+
+                              style="-fx-background-radius: 0;
+                                     -fx-border-radius: 0;"/>
+
+                </VBox>
+
+                <!-- EMAIL -->
+
+                <VBox spacing="4">
+
+                    <Label text="Email"
+
+                           style="-fx-font-size: 11px;
+                                  -fx-font-weight: bold;"/>
+
+                    <TextField fx:id="tfEmail"
+
+                               prefHeight="34"
+
+                               style="-fx-background-radius: 0;
+                                      -fx-border-radius: 0;"/>
+
+                </VBox>
+
+                <!-- BALANCE -->
+
+                <HBox spacing="10">
+
+                    <VBox spacing="4"
+                          HBox.hgrow="ALWAYS">
+
+                        <Label text="Opening Balance"
+
+                               style="-fx-font-size: 11px;
+                                      -fx-font-weight: bold;"/>
+
+                        <TextField fx:id="tfOpeningBalance"
+
+                                   promptText="0.00"
+
+                                   prefHeight="34"
+
+                                   style="-fx-background-radius: 0;
+                                          -fx-border-radius: 0;"/>
+
+                    </VBox>
+
+                    <VBox spacing="4">
+
+                        <Label text="Type"
+
+                               style="-fx-font-size: 11px;
+                                      -fx-font-weight: bold;"/>
+
+                        <ComboBox fx:id="cbBalanceType"
+
+                                  prefWidth="80"
+                                  prefHeight="34"
+
+                                  style="-fx-background-radius: 0;
+                                         -fx-border-radius: 0;"/>
+
+                    </VBox>
+
+                </HBox>
+
+                <!-- SPACE -->
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <!-- BUTTONS -->
+
+                <GridPane hgap="10"
+                          vgap="10">
+
+                    <columnConstraints>
+
+                        <ColumnConstraints hgrow="ALWAYS"/>
+
+                        <ColumnConstraints hgrow="ALWAYS"/>
+
+                    </columnConstraints>
+
+                    <!-- SAVE -->
+
+                    <Button text="Save Customer"
+
+                            maxWidth="Infinity"
+                            prefHeight="42"
+
+                            onAction="#onSave"
+
+                            GridPane.rowIndex="0"
+                            GridPane.columnIndex="0"
+
+                            style="-fx-background-color: #2563eb;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 12px;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 0;
+                                   -fx-border-radius: 0;"/>
+
+                    <!-- RESET -->
+
+                    <Button text="Reset"
+
+                            maxWidth="Infinity"
+                            prefHeight="42"
+
+                            onAction="#onReset"
+
+                            GridPane.rowIndex="0"
+                            GridPane.columnIndex="1"
+
+                            style="-fx-background-color: #9333ea;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 12px;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 0;
+                                   -fx-border-radius: 0;"/>
+
+                    <!-- DELETE -->
+
+                    <Button text="Delete Customer"
+
+                            maxWidth="Infinity"
+                            prefHeight="42"
+
+                            onAction="#onDelete"
+
+                            GridPane.rowIndex="1"
+                            GridPane.columnSpan="2"
+
+                            style="-fx-background-color: #dc2626;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 12px;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 0;
+                                   -fx-border-radius: 0;"/>
+
+                </GridPane>
+
+            </VBox>
+
+            <!-- ========================================= -->
+            <!-- CENTER + RIGHT -->
+            <!-- ========================================= -->
+
+            <VBox HBox.hgrow="ALWAYS">
+
+                <!-- ===================================== -->
+                <!-- HEADER -->
+                <!-- ===================================== -->
+
+                <VBox spacing="8"
+
+                      style="-fx-background-color: white;
+                             -fx-padding: 12;
+                             -fx-border-color: #d1d5db;
+                             -fx-border-width: 0 0 1 0;">
+
+                    <HBox alignment="CENTER_LEFT">
+
+                        <!-- TITLE -->
+
+                        <VBox spacing="2">
+
+                            <Label text="Customer Management"
+
+                                   style="-fx-font-size: 22px;
+                                          -fx-font-weight: bold;
+                                          -fx-text-fill: #111827;"/>
+
+                            <Label text="Customer • GST • Credit • Ledger Management"
+
+                                   style="-fx-font-size: 11px;
+                                          -fx-text-fill: #6b7280;"/>
+
+                        </VBox>
+
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <!-- SEARCH -->
+
+                        <HBox spacing="10">
+
+                            <TextField fx:id="tfSearch"
+
+                                       promptText="Search Customer / Phone / GST"
+
+                                       prefWidth="350"
+                                       prefHeight="40"
+
+                                       style="-fx-background-radius: 0;
+                                              -fx-border-radius: 0;
+                                              -fx-font-size: 13px;"/>
+
+                            <ComboBox fx:id="cbType"
+
+                                      prefWidth="150"
+                                      prefHeight="40"
+
+                                      style="-fx-background-radius: 0;
+                                             -fx-border-radius: 0;"/>
+
+                        </HBox>
+
+                    </HBox>
+
+                </VBox>
+
+                <!-- ===================================== -->
+                <!-- TABLE AREA -->
+                <!-- ===================================== -->
+
+                <VBox spacing="10"
+
+                      VBox.vgrow="ALWAYS"
+
+                      style="-fx-padding: 12;">
+
+                    <!-- TABLE HEADER -->
+
+                    <HBox alignment="CENTER_LEFT">
+
+                        <Label text="Customer List"
+
+                               style="-fx-font-size: 22px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: #111827;"/>
+
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <Label text="Double Click Row → Ledger"
+
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #6b7280;"/>
+
+                    </HBox>
+
+                    <!-- TABLE -->
+
+                    <TableView fx:id="customerTable"
+
+                               VBox.vgrow="ALWAYS"
+
+                               style="-fx-background-radius: 0;
+                                      -fx-border-radius: 0;
+                                      -fx-font-size: 13px;">
+
+                        <columns>
+
+                            <TableColumn fx:id="colCode"
+                                         text="Customer Code"
+                                         prefWidth="180"/>
+
+                            <TableColumn fx:id="colName"
+                                         text="Customer Name"
+                                         prefWidth="260"/>
+
+                            <TableColumn fx:id="colPhone"
+                                         text="Phone Number"
+                                         prefWidth="170"/>
+
+                            <TableColumn fx:id="colType"
+                                         text="Type"
+                                         prefWidth="110"/>
+
+                            <TableColumn fx:id="colGST"
+                                         text="GST Number"
+                                         prefWidth="220"/>
+
+                            <TableColumn fx:id="colBalance"
+                                         text="Opening Balance"
+                                         prefWidth="150"/>
+
+                        </columns>
+
+                    </TableView>
+
+                </VBox>
+
+            </VBox>
+
+        </HBox>
+
+    </center>
+
+</BorderPane>

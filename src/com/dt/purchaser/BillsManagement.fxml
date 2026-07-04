@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dt.purchaser.BillsController"
+
+            prefWidth="1850"
+            prefHeight="980"
+
+            style="-fx-background-color:#f3f4f6;">
+
+    <center>
+
+        <VBox spacing="0">
+
+            <!-- ===================================================== -->
+            <!-- HEADER -->
+            <!-- ===================================================== -->
+
+            <VBox spacing="8"
+
+                  style="-fx-background-color:white;
+                         -fx-padding:12;
+                         -fx-border-color:#d1d5db;
+                         -fx-border-width:0 0 1 0;">
+
+                <HBox alignment="CENTER_LEFT">
+
+                    <VBox spacing="2">
+
+                        <Label text="Bills Management"
+
+                               style="-fx-font-size:22px;
+                                      -fx-font-weight:bold;"/>
+
+                        <Label text="Purchase Bills • Credit Bills • Settlements"
+
+                               style="-fx-font-size:11px;
+                                      -fx-text-fill:#6b7280;"/>
+
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Button text="Add Bill"
+                            prefHeight="40"
+                            onAction="#onAddBill"/>
+                </HBox>
+
+            </VBox>
+
+            <!-- ===================================================== -->
+            <!-- FILTERS -->
+            <!-- ===================================================== -->
+
+            <VBox spacing="10"
+                  style="-fx-padding:12;">
+
+                <HBox spacing="10">
+
+                    <DatePicker fx:id="dpFrom"
+                                prefWidth="150"
+                                promptText="From Date"/>
+
+                    <DatePicker fx:id="dpTo"
+                                prefWidth="150"
+                                promptText="To Date"/>
+
+                    <ComboBox fx:id="cbPurchaser"
+                              prefWidth="250"
+                              promptText="All Purchasers"/>
+
+                    <ComboBox fx:id="cbStatus"
+                              prefWidth="150"
+                              promptText="Status"/>
+
+                    <TextField fx:id="tfSearch"
+                               HBox.hgrow="ALWAYS"
+                               promptText="Search Bill No / Purchaser"/>
+
+                    <Button text="Apply Filter"
+                            prefWidth="120"
+                            onAction="#onApplyFilter"/>
+
+                    <Button text="Reset"
+                            prefWidth="100"
+                            onAction="#onResetFilter"/>
+
+                </HBox>
+
+            </VBox>
+
+            <!-- ===================================================== -->
+            <!-- SUMMARY CARDS -->
+            <!-- ===================================================== -->
+
+            <HBox spacing="15"
+                  style="-fx-padding:0 12 12 12;">
+
+                <VBox prefWidth="220"
+
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-border-color:#e5e7eb;">
+
+                    <Label text="Total Bills"
+                           style="-fx-font-size:12px;"/>
+
+                    <Label fx:id="lblTotalBills"
+
+                           style="-fx-font-size:24px;
+                                  -fx-font-weight:bold;"/>
+                </VBox>
+
+                <VBox prefWidth="220"
+
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-border-color:#e5e7eb;">
+
+                    <Label text="Pending Amount"
+                           style="-fx-font-size:12px;"/>
+
+                    <Label fx:id="lblPendingAmount"
+
+                           style="-fx-font-size:24px;
+                                  -fx-font-weight:bold;
+                                  -fx-text-fill:#dc2626;"/>
+                </VBox>
+
+                <VBox prefWidth="220"
+
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-border-color:#e5e7eb;">
+
+                    <Label text="Collected Amount"
+                           style="-fx-font-size:12px;"/>
+
+                    <Label fx:id="lblCollected"
+
+                           style="-fx-font-size:24px;
+                                  -fx-font-weight:bold;
+                                  -fx-text-fill:#16a34a;"/>
+                </VBox>
+
+                <VBox prefWidth="220"
+
+                      style="-fx-background-color:white;
+                             -fx-padding:15;
+                             -fx-border-color:#e5e7eb;">
+
+                    <Label text="Overdue Bills"
+                           style="-fx-font-size:12px;"/>
+
+                    <Label fx:id="lblOverdue"
+
+                           style="-fx-font-size:24px;
+                                  -fx-font-weight:bold;
+                                  -fx-text-fill:#ea580c;"/>
+                </VBox>
+
+            </HBox>
+
+            <!-- ===================================================== -->
+            <!-- TABLE -->
+            <!-- ===================================================== -->
+
+            <VBox VBox.vgrow="ALWAYS"
+                  style="-fx-padding:0 12 12 12;">
+
+                <TableView fx:id="billTable"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn fx:id="colBillNo"
+                                     text="Bill No"
+                                     prefWidth="140"/>
+
+                        <TableColumn fx:id="colDate"
+                                     text="Bill Date"
+                                     prefWidth="130"/>
+
+                        <TableColumn fx:id="colPurchaser"
+                                     text="Purchaser"
+                                     prefWidth="250"/>
+
+                        <TableColumn fx:id="colAmount"
+                                     text="Bill Amount"
+                                     prefWidth="140"/>
+
+                        <TableColumn fx:id="colPaid"
+                                     text="Paid Amount"
+                                     prefWidth="140"/>
+
+                        <TableColumn fx:id="colBalance"
+                                     text="Balance"
+                                     prefWidth="140"/>
+
+                        <TableColumn fx:id="colStatus"
+                                     text="Status"
+                                     prefWidth="120"/>
+
+                        <TableColumn fx:id="colActions"
+                                     text="Actions"
+                                     prefWidth="220"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+        </VBox>
+
+    </center>
+
+</BorderPane>

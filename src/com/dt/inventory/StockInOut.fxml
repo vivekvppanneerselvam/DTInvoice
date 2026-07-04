@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.dt.inventory.StockInOutController"
+
+      spacing="15"
+
+      prefWidth="650"
+
+      style="-fx-background-color: white;
+             -fx-padding: 20;">
+
+    <Label text="Stock Management"
+           style="-fx-font-size: 24px;
+                  -fx-font-weight: bold;"/>
+
+    <GridPane hgap="15"
+              vgap="15">
+
+        <Label text="Item"
+               GridPane.rowIndex="0"
+               GridPane.columnIndex="0"/>
+
+        <ComboBox fx:id="cbMeasurement"
+                  prefWidth="300"
+                  GridPane.rowIndex="0"
+                  GridPane.columnIndex="1"/>
+
+        <Label text="Type"
+               GridPane.rowIndex="1"
+               GridPane.columnIndex="0"/>
+
+        <ComboBox fx:id="cbType"
+                  prefWidth="200"
+                  GridPane.rowIndex="1"
+                  GridPane.columnIndex="1"/>
+
+        <Label text="Quantity"
+               GridPane.rowIndex="2"
+               GridPane.columnIndex="0"/>
+
+        <TextField fx:id="tfQuantity"
+                   GridPane.rowIndex="2"
+                   GridPane.columnIndex="1"/>
+
+        <Label text="Remarks"
+               GridPane.rowIndex="3"
+               GridPane.columnIndex="0"/>
+
+        <TextArea fx:id="tfRemarks"
+                  prefHeight="120"
+                  GridPane.rowIndex="3"
+                  GridPane.columnIndex="1"/>
+
+    </GridPane>
+
+    <HBox alignment="CENTER_RIGHT">
+
+        <Button text="Save Transaction"
+                prefHeight="40"
+                onAction="#onSave"/>
+
+    </HBox>
+
+</VBox>

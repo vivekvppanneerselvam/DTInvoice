@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.dt.modern.model.ItemCardController"
+
+      spacing="8"
+
+      prefWidth="230"
+      prefHeight="320"
+
+      style="-fx-background-color: white;
+             -fx-border-color: #E5E7EB;
+             -fx-border-width: 1;
+             -fx-background-radius: 0;
+             -fx-border-radius: 0;">
+
+    <padding>
+
+        <Insets top="10"
+                right="10"
+                bottom="10"
+                left="10"/>
+
+    </padding>
+
+    <!-- IMAGE -->
+
+    <StackPane prefHeight="120"
+
+               style="-fx-background-color: #F3F4F6;">
+
+        <ImageView fx:id="imageView"
+
+                   fitWidth="120"
+                   fitHeight="100"
+
+                   preserveRatio="true"/>
+
+    </StackPane>
+
+    <!-- ITEM NAME -->
+
+    <Label fx:id="lblItemName"
+
+           style="-fx-font-size: 16;
+                  -fx-font-weight: bold;"/>
+
+    <!-- CATEGORY -->
+
+    <Label fx:id="lblCategory"
+
+           style="-fx-text-fill: #6B7280;
+                  -fx-font-size: 11;"/>
+
+    <!-- MEASUREMENT -->
+
+    <ComboBox fx:id="cbMeasurement"
+
+              prefWidth="200"
+              prefHeight="34"
+
+              style="-fx-background-radius: 0;
+                     -fx-border-radius: 0;"/>
+
+    <!-- QTY -->
+
+    <HBox spacing="8">
+
+        <Label text="Qty"
+
+               style="-fx-font-weight: bold;"/>
+
+        <TextField fx:id="tfQty"
+
+                   text="1"
+
+                   prefWidth="70"
+
+                   style="-fx-background-radius: 0;
+                          -fx-border-radius: 0;"/>
+
+    </HBox>
+
+    <!-- PRICE -->
+
+    <HBox spacing="8">
+
+        <Label text="₹"
+
+               style="-fx-font-weight: bold;"/>
+
+        <TextField fx:id="tfPrice"
+
+                   editable="false"
+
+                   HBox.hgrow="ALWAYS"
+
+                   style="-fx-background-radius: 0;
+                          -fx-border-radius: 0;"/>
+
+        <Button fx:id="btnEditPrice"
+
+                text="✏"
+
+                prefWidth="35"
+
+                style="-fx-background-color: #111827;
+                       -fx-text-fill: white;
+                       -fx-background-radius: 0;"/>
+
+    </HBox>
+
+    <!-- GST -->
+
+    <HBox spacing="8">
+
+        <Label text="GST %"
+
+               style="-fx-font-weight: bold;"/>
+
+        <TextField fx:id="tfGST"
+
+                   prefWidth="80"
+
+                   style="-fx-background-radius: 0;
+                          -fx-border-radius: 0;"/>
+
+    </HBox>
+
+    <!-- STOCK -->
+
+    <Label fx:id="lblStock"
+
+           style="-fx-text-fill: #059669;
+                  -fx-font-weight: bold;"/>
+
+    <!-- ADD BUTTON -->
+
+    <Button fx:id="btnAdd"
+
+            text="ADD TO CART"
+
+            maxWidth="Infinity"
+
+            prefHeight="40"
+
+            style="-fx-background-color: #111827;
+                   -fx-text-fill: white;
+                   -fx-font-weight: bold;
+                   -fx-background-radius: 0;"/>
+
+</VBox>
